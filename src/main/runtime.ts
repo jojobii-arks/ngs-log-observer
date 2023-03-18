@@ -1,14 +1,9 @@
-import { app, BrowserWindow, Menu } from 'electron';
+import { app, BrowserWindow, ipcMain, Menu } from 'electron';
 import getGameDirectory from '../lib/utils/getGameDirectory';
 import { CHANNELS } from '../lib/types';
 
 export default async function runtime(window: BrowserWindow) {
   console.log('Starting application...');
-
-  function ping() {
-    console.log('pinging');
-    window.webContents.send(CHANNELS.ACTION_NEW);
-  }
 
   function displayAlert(message: string) {
     window.webContents.send(CHANNELS.ALERT, message);
@@ -19,7 +14,7 @@ export default async function runtime(window: BrowserWindow) {
       label: app.name,
       submenu: [
         {
-          click: () => ping(),
+          click: () => displayAlert('pong!'),
           label: 'ping!',
         },
       ],
@@ -28,5 +23,8 @@ export default async function runtime(window: BrowserWindow) {
   Menu.setApplicationMenu(menu);
 
   const gameDirectory = getGameDirectory();
-  displayAlert(gameDirectory);
+
+  ipcMain.handle(CHANNELS.GET_GAME_DIR, () => {
+    return gameDirectory;
+  });
 }

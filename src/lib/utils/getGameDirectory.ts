@@ -11,7 +11,8 @@ export default function getGameDirectory() {
     )
       .map((name) => ({ name, ctime: fs.statSync(name).ctime }))
       .sort((a, b) => b.ctime.getTime() - a.ctime.getTime())[0].name;
-  } catch {
+  } catch (error) {
+    console.error(error);
     throw Error(`Unable to find PSO2 directory in Documents.`);
   }
 }

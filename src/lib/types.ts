@@ -1,6 +1,7 @@
 export enum CHANNELS {
   ACTION_NEW = 'ACTION_NEW',
   ALERT = 'ALERT',
+  GET_GAME_DIR = 'GET_GAME_DIR',
 }
 
 export type ActionLogItem = {
