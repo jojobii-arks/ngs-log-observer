@@ -1,4 +1,4 @@
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, shell } from 'electron';
 import { CHANNELS } from '../lib/types';
 
 // Custom APIs for renderer
@@ -12,7 +12,11 @@ const api = {
   getGameDirectory: async () => {
     return await ipcRenderer.invoke(CHANNELS.GET_GAME_DIR);
   },
-  clear: () => ipcRenderer.removeAllListeners(''),
+  openGameDirectory: async () => {
+    shell.openPath(await ipcRenderer.invoke(CHANNELS.GET_GAME_DIR));
+  },
+  // @ts-expect-error It should be able to accept no strings...
+  clear: () => ipcRenderer.removeAllListeners(),
 };
 
 export default api;

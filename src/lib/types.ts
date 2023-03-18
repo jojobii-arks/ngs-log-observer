@@ -10,7 +10,7 @@ export type ActionLogItem = {
   action_type: string;
   player_id: string;
   player_name: string;
-  item_name: string;
+  item_name?: string;
   item_num?: string;
   current_meseta?: string;
 };

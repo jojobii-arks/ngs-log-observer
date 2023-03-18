@@ -11,7 +11,7 @@ export default async function runtime(window: BrowserWindow) {
     window.webContents.send(CHANNELS.ALERT, message);
   }
 
-  function pushNewAction(action: ActionLogItem) {
+  function pushNewAction(action: ActionLogItem[]) {
     window.webContents.send(CHANNELS.ACTION_NEW, action);
   }
 
@@ -19,6 +19,10 @@ export default async function runtime(window: BrowserWindow) {
     {
       label: app.name,
       submenu: [
+        {
+          click: () => window.webContents.openDevTools(),
+          label: 'dev tools',
+        },
         {
           click: () => displayAlert('pong!'),
           label: 'ping!',
@@ -29,9 +33,6 @@ export default async function runtime(window: BrowserWindow) {
   Menu.setApplicationMenu(menu);
 
   const gameDirectory = getGameDirectory();
-  ipcMain.handle(CHANNELS.GET_GAME_DIR, () => {
-    return gameDirectory;
-  });
 
   const gameLogDirectory = gameDirectory.concat('\\log_ngs\\');
 
@@ -77,12 +78,14 @@ export default async function runtime(window: BrowserWindow) {
         if (data.length > previousLength) {
           const difference = data.length - previousLength;
 
+          const payload: ActionLogItem[] = [];
           for (let index = difference; index > 0; index--) {
             const action = data[data.length - index];
             console.log('new event', action);
             datamap[path].push(action);
-            pushNewAction(action);
+            payload.push(action);
           }
+          pushNewAction(payload);
         }
         return;
       }
