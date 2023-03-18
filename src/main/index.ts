@@ -1,7 +1,6 @@
 import { app, shell, BrowserWindow } from 'electron';
 import { join } from 'path';
 import { electronApp, optimizer, is } from '@electron-toolkit/utils';
-import icon from '../../resources/icon.png?asset';
 import { attachIpcHandlers } from './ipcHandlers';
 import runtime from './runtime';
 
@@ -12,16 +11,15 @@ function createWindow(): BrowserWindow {
     height: 670,
     show: false,
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false,
     },
     alwaysOnTop: true,
-    titleBarStyle: 'hidden',
+    // titleBarStyle: 'hidden',
     titleBarOverlay: {
       color: '#20252e',
-      symbolColor: 'white',
+      symbolColor: '#a6adbb',
     },
   });
 
@@ -41,6 +39,8 @@ function createWindow(): BrowserWindow {
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'));
   }
+
+  mainWindow.webContents.openDevTools();
 
   return mainWindow;
 }

@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, Menu } from 'electron';
+import { app, BrowserWindow, Menu } from 'electron';
 import getGameDirectory from '../lib/node/utils/getGameDirectory';
 import { ActionLogItem, CHANNELS } from '../lib/types';
 import chokidar from 'chokidar';
