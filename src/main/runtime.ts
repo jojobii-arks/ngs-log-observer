@@ -1,8 +1,8 @@
 import { app, BrowserWindow, ipcMain, Menu } from 'electron';
-import getGameDirectory from '../lib/utils/getGameDirectory';
+import getGameDirectory from '../lib/node/utils/getGameDirectory';
 import { ActionLogItem, CHANNELS } from '../lib/types';
 import chokidar from 'chokidar';
-import readActionLog from '../lib/utils/readActionLog';
+import readActionLog from '../lib/node/utils/readActionLog';
 
 export default async function runtime(window: BrowserWindow) {
   console.log('Starting application...');

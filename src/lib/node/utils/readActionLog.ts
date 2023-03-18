@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import csv from 'csvtojson';
-import { ActionLogItem } from '../types';
+import { ActionLogItem } from '../../types';
 const encoding = 'utf16le';
 
 export default async function readActionLog(filepath: string) {

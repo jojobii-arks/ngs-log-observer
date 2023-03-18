@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ActionLogItem } from 'src/lib/types';
 import useSWR from 'swr';
+import { ActionLogItem } from 'src/lib/types';
 
 export default function App(): JSX.Element {
   const { data: gameDirectory } = useSWR(

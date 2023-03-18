@@ -1,7 +1,5 @@
-appId: com.electron.app
+appId: com.ngs-log-observer.app
 productName: ngs-log-observer
-directories:
-  buildResources: build
 files:
   - '!**/.vscode/*'
   - '!src/*'
@@ -11,11 +9,7 @@ files:
   - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
 asarUnpack:
   - resources/*
-afterSign: build/notarize.js
 win:
   executableName: ngs-log-observer
   target: portable
 npmRebuild: false
-publish:
-  provider: generic
-  url: https://example.com/auto-updates

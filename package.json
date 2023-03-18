@@ -1,7 +1,7 @@
 {
   "name": "ngs-log-observer",
   "version": "1.0.0",
-  "description": "An Electron application with React and TypeScript",
+  "description": "Action Log observer for PSO2:NGS",
   "main": "./out/main/index.js",
   "author": "example.com",
   "homepage": "https://www.electronjs.org",
@@ -56,3 +56,4 @@
     "vite": "^4.1.4"
   }
 }
+
