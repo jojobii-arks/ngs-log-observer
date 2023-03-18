@@ -1,0 +1,52 @@
+---
+import Core from '../components/Core.astro';
+---
+
+<Core>
+  <div class="p-8">
+    <div class="max-w-2xl prose mx-auto rounded-lg bg-base-300 p-8 shadow-md">
+      <header>
+        <h1 class="mb-2">NGS Log Observer</h1>
+        <p>
+          An <i>ActionLog</i> viewer for
+          <a href="https://pso2.com/">PSO2:NGS©️</a>
+        </p>
+      </header>
+
+      <section id="features">
+        <h2>Features</h2>
+        <ul>
+          <li>
+            Watch item drops from a dedicated window as they happen in the game.
+          </li>
+          <li>View total N-Meseta gained during your play session.</li>
+        </ul>
+      </section>
+
+      <section id="download">
+        <h2>
+          <a
+            class="link link-hover"
+            href="https://github.com/jojobii-arks/ngs-log-observer/releases/"
+            >View releases here!</a
+          >
+        </h2>
+      </section>
+
+      <hr />
+      <section id="preview">
+        <h2 class="text-center">Previews (v1.0)</h2>
+        <img
+          class="mx-auto rounded-xl border-base-content border-2"
+          src="images/preview-filled-log.png"
+          alt="Filled Item Log"
+        />
+        <img
+          class="mx-auto rounded-xl border-base-content border-2"
+          src="images/preview-live.gif"
+          alt="Animated Live Preview"
+        />
+      </section>
+    </div>
+  </div>
+</Core>
