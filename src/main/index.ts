@@ -16,7 +16,7 @@ function createWindow(): BrowserWindow {
       sandbox: false,
     },
     alwaysOnTop: true,
-    // titleBarStyle: 'hidden',
+    titleBarStyle: 'hidden',
     titleBarOverlay: {
       color: '#20252e',
       symbolColor: '#a6adbb',
@@ -40,7 +40,8 @@ function createWindow(): BrowserWindow {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'));
   }
 
-  mainWindow.webContents.openDevTools();
+  // ? Open Dev Tools on launch
+  // mainWindow.webContents.openDevTools();
 
   return mainWindow;
 }
