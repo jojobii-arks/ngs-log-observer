@@ -2,8 +2,14 @@ import { useEffect } from 'react';
 
 export default function App(): JSX.Element {
   useEffect(() => {
+    api.clear();
+
     api.onPing(() => {
-      console.log('pong');
+      alert('pong!');
+    });
+
+    api.onAlert((_, value) => {
+      alert(value);
     });
 
     return () => {
