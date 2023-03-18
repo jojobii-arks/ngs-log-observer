@@ -1,5 +1,5 @@
 appId: com.ngs-log-observer.app
-productName: ngs-log-observer
+productName: NGS Log Observer
 files:
   - '!**/.vscode/*'
   - '!src/*'
@@ -10,6 +10,6 @@ files:
 directories:
   buildResources: build
 win:
-  executableName: ngs-log-observer
+  executableName: NGS Log Observer
   target: portable
 npmRebuild: true
