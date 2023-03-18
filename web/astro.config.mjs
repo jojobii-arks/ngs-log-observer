@@ -1,4 +1,12 @@
 import { defineConfig } from 'astro/config';
+import tailwind from '@astrojs/tailwind';
+
+import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  integrations: [tailwind(), mdx()],
+  site: 'https://jojobii.github.io/',
+  base: '/ngs-log-observer',
+});
+
