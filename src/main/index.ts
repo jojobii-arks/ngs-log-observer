@@ -2,6 +2,7 @@ import { app, shell, BrowserWindow } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+let window: BrowserWindow
 
 function createWindow(): void {
   // Create the browser window.
@@ -33,6 +34,8 @@ function createWindow(): void {
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
+
+  window = mainWindow
 }
 
 // This method will be called when Electron has finished
@@ -69,3 +72,9 @@ app.on('window-all-closed', () => {
 
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.
+
+import runtime from './runtime'
+
+app.whenReady().then(() => {
+  runtime(window)
+})
