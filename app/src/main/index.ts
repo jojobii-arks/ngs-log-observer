@@ -7,8 +7,10 @@ import runtime from './runtime';
 function createWindow(): BrowserWindow {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: 500,
+    height: 600,
+    minWidth: 250,
+    minHeight: 250,
     show: false,
     autoHideMenuBar: true,
     webPreferences: {

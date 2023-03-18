@@ -48,11 +48,11 @@ export default function App(): JSX.Element {
     };
   });
   return (
-    <main className="flex h-[100vh]  flex-col">
-      <header className="draggable select-none rounded-b-xl bg-base-300 p-4">
+    <main className="flex h-[100vh] flex-col overflow-y-clip">
+      <header className="draggable select-none bg-base-300 p-4">
         <div>
-          <h1 className="mb-2 text-4xl font-black">NGS Log Observer</h1>
-          <p className="mb-4">
+          <h1 className="mb-1 text-2xl font-black">NGS Log Observer</h1>
+          <p className="mb-2 text-sm">
             Using logs from{' '}
             <button
               className="link-hover link"
@@ -87,15 +87,15 @@ export default function App(): JSX.Element {
         </div>
       </header>
       <div className="flex-auto overflow-y-scroll">
-        <table className="table-compact table w-full">
-          <thead>
+        <table className="table-compact relative table w-full">
+          <thead className="sticky top-0">
             <tr>
-              <th>Type</th>
+              <th className="rounded-none">Type</th>
               <th>Data</th>
-              <th>Time</th>
+              <th className="rounded-none">Time</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="min-h-full">
             {[...log]
               .reverse()
               .filter((e) => {
