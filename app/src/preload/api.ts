@@ -1,5 +1,6 @@
 import { ipcRenderer, shell } from 'electron';
 import { CHANNELS } from '../lib/types';
+import { SetItAlwaysOnTopResponse } from '../main/ipcHandlers';
 
 // Custom APIs for renderer
 const api = {
@@ -14,6 +15,12 @@ const api = {
   },
   openGameDirectory: async () => {
     shell.openPath(await ipcRenderer.invoke(CHANNELS.GET_GAME_DIR));
+  },
+  setIsAlwaysOnTop: async (isAlwaysOnTop: boolean) => {
+    return (await ipcRenderer.invoke(
+      CHANNELS.SET_IS_ALWAYS_ON_TOP,
+      isAlwaysOnTop
+    )) as SetItAlwaysOnTopResponse;
   },
   // @ts-expect-error It should be able to accept no strings...
   clear: () => ipcRenderer.removeAllListeners(),

@@ -13,6 +13,10 @@ export default function App(): JSX.Element {
    * TODO: User Preferences in React Context?
    */
   const [showMeseta, setShowMeseta] = useState<boolean>(true);
+  const [isAlwaysOnTop, setIsAlwaysOnTop] = useState<boolean>(false);
+  useEffect(() => {
+    api.setIsAlwaysOnTop(isAlwaysOnTop);
+  }, [isAlwaysOnTop]);
 
   /** Total amount of Meseta gained during runtime of app. Calculated from logs. Does not account for auto-sell of valuable items. */
   const sessionMesetaTotal = useMemo<number>(
@@ -73,16 +77,29 @@ export default function App(): JSX.Element {
               </div>
             </div>
           </div>
-          <div className="form-control">
-            <label className="no-drag label cursor-pointer">
-              <span className="label-text mr-4">Show Meseta</span>
-              <input
-                type="checkbox"
-                className="toggle"
-                checked={showMeseta}
-                onChange={() => setShowMeseta(!showMeseta)}
-              />
-            </label>
+          <div className="flex flex-col">
+            <div className="form-control">
+              <label className="no-drag label cursor-pointer">
+                <span className="label-text mr-4">Show Meseta</span>
+                <input
+                  type="checkbox"
+                  className="toggle"
+                  checked={showMeseta}
+                  onChange={() => setShowMeseta(!showMeseta)}
+                />
+              </label>
+            </div>
+            <div className="form-control">
+              <label className="no-drag label cursor-pointer">
+                <span className="label-text mr-4">Always On Top</span>
+                <input
+                  type="checkbox"
+                  className="toggle"
+                  checked={isAlwaysOnTop}
+                  onChange={() => setIsAlwaysOnTop(!isAlwaysOnTop)}
+                />
+              </label>
+            </div>
           </div>
         </div>
       </header>
