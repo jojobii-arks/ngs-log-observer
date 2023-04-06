@@ -2,6 +2,7 @@ export enum CHANNELS {
   ACTION_NEW = 'ACTION_NEW',
   ALERT = 'ALERT',
   GET_GAME_DIR = 'GET_GAME_DIR',
+  SET_IS_ALWAYS_ON_TOP = 'TOGGLE_ALWAYS_ON_TOP',
 }
 
 export type ActionLogItem = {
