@@ -4,7 +4,8 @@
     "src/renderer/app/env.d.ts",
     "src/renderer/app/**/*",
     "src/renderer/app/**/*.svelte",
-    "src/preload/*.d.ts"
+    "src/preload/*.d.ts",
+    "svelte.config.mjs"
   ],
   "compilerOptions": {
     "importsNotUsedAsValues": "error",

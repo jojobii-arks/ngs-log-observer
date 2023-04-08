@@ -43,7 +43,7 @@ function createWindow(): BrowserWindow {
   }
 
   // ? Open Dev Tools on launch
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   return mainWindow;
 }
