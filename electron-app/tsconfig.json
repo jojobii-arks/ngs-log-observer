@@ -1,9 +1,9 @@
 {
   "extends": "@electron-toolkit/tsconfig/tsconfig.json",
   "include": [
-    "src/renderer/app/env.d.ts",
-    "src/renderer/app/**/*",
-    "src/renderer/app/**/*.svelte",
+    "src/renderer/src/env.d.ts",
+    "src/renderer/src/**/*",
+    "src/renderer/src/**/*.svelte",
     "src/preload/*.d.ts"
   ],
   "compilerOptions": {
