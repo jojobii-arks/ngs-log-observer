@@ -1,10 +1,21 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.node.json" },
-    { "path": "./tsconfig.web.json" }
+  "extends": "@electron-toolkit/tsconfig/tsconfig.json",
+  "include": [
+    "src/renderer/app/env.d.ts",
+    "src/renderer/app/**/*",
+    "src/renderer/app/**/*.svelte",
+    "src/preload/*.d.ts",
+    "src/lib/**/*",
+    "svelte.config.mjs"
   ],
   "compilerOptions": {
-    "isolatedModules": true
-  }
+    "importsNotUsedAsValues": "error",
+    "preserveValueImports": true,
+    "useDefineForClassFields": true,
+    "strict": false,
+    "allowJs": true,
+    "checkJs": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"]
+  },
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
