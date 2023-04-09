@@ -5,6 +5,7 @@
     "src/renderer/app/**/*",
     "src/renderer/app/**/*.svelte",
     "src/preload/*.d.ts",
+    "src/lib/**/*",
     "svelte.config.mjs"
   ],
   "compilerOptions": {
