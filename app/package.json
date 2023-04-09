@@ -1,6 +1,6 @@
 {
   "name": "ngs-log-observer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Action Log observer for PSO2:NGS",
   "main": "./out/main/index.js",
   "author": "jojobii-arks",
@@ -32,11 +32,8 @@
     "@sveltejs/vite-plugin-svelte": "^2.0.3",
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "16.18.14",
-    "@types/react": "18.0.26",
-    "@types/react-dom": "18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
-    "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.14",
     "daisyui": "^2.51.4",
     "electron": "^22.3.2",
@@ -58,3 +55,4 @@
     "vite": "^4.1.4"
   }
 }
+
