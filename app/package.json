@@ -1,6 +1,6 @@
 {
   "name": "ngs-log-observer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Action Log observer for PSO2:NGS",
   "main": "./out/main/index.js",
   "author": "jojobii-arks",
@@ -54,4 +54,3 @@
     "vite": "^4.1.4"
   }
 }
-

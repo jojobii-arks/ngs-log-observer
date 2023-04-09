@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { ActionLogItem } from '../../lib/types';
+  import { fade } from 'svelte/transition';
+  import { flip } from 'svelte/animate';
   const api = window.api;
 
   let log: ActionLogItem[] = [];
@@ -17,6 +19,15 @@
         total + Number(/\d+(?=\))(?!\()/.exec(action.item_num ?? '')),
       0
     );
+  let logToDisplay: ActionLogItem[] = [];
+  $: logToDisplay = [...log].reverse().filter((e) => {
+    /** check if `showMeseta` is on, then filter accordingly */
+    if (!showMeseta) {
+      if (e.item_num?.includes('N-Meseta')) return false;
+    }
+    /** only show pickups and sells */
+    return ['[Pickup]', '[DiscradExchange]'].includes(e.action_type);
+  });
 
   let showMeseta = true;
   let isAlwaysOnTop = false;
@@ -96,15 +107,8 @@
         </tr>
       </thead>
       <tbody class="min-h-full">
-        {#each [...log].reverse().filter((e) => {
-          /** check if `showMeseta` is on, then filter accordingly */
-          if (!showMeseta) {
-            if (e.item_num?.includes('N-Meseta')) return false;
-          }
-          /** only show pickups and sells */
-          return ['[Pickup]', '[DiscradExchange]'].includes(e.action_type);
-        }) as action}
-          <tr>
+        {#each logToDisplay as action (action.log_time + action.action_id)}
+          <tr in:fade animate:flip={{ duration: 200 }}>
             <td>{action.item_num?.includes('N-Meseta') ? `💰` : `📥`}</td>
             <td>
               {action.item_name
