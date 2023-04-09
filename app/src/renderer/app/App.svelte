@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { ActionLogItem } from '../../lib/types';
+  const api = window.api;
 
   let log: ActionLogItem[] = [];
   let gameDirectory: string;
@@ -19,7 +20,7 @@
 
   let showMeseta = true;
   let isAlwaysOnTop = false;
-  console.log(api);
+  $: api.setIsAlwaysOnTop(isAlwaysOnTop);
 
   onMount(() => {
     api.onAlert((_, value) => {
@@ -27,11 +28,11 @@
     });
 
     api.onNewAction((_, value) => {
-      log = [...log, value];
+      log = [...log, ...value];
     });
 
     api.getGameDirectory().then((value) => {
-      gameDirectory = value;
+      gameDirectory = value.split('\\').at(-1);
     });
 
     return () => {
@@ -69,14 +70,7 @@
         <div class="form-control">
           <label class="no-drag label cursor-pointer">
             <span class="label-text mr-4">Show Meseta</span>
-            <input
-              type="checkbox"
-              class="toggle"
-              checked={showMeseta}
-              on:change={() => {
-                /** TODO */
-              }}
-            />
+            <input type="checkbox" class="toggle" bind:checked={showMeseta} />
           </label>
         </div>
         <div class="form-control">
@@ -85,10 +79,7 @@
             <input
               type="checkbox"
               class="toggle"
-              checked={isAlwaysOnTop}
-              on:change={() => {
-                /** TODO */
-              }}
+              bind:checked={isAlwaysOnTop}
             />
           </label>
         </div>
@@ -105,11 +96,25 @@
         </tr>
       </thead>
       <tbody class="min-h-full">
-        {#each log as item}
+        {#each [...log].reverse().filter((e) => {
+          /** check if `showMeseta` is on, then filter accordingly */
+          if (!showMeseta) {
+            if (e.item_num?.includes('N-Meseta')) return false;
+          }
+          /** only show pickups and sells */
+          return ['[Pickup]', '[DiscradExchange]'].includes(e.action_type);
+        }) as action}
           <tr>
-            <td>{item.action_type}</td>
-            <td>{item.item_name}</td>
-            <td>{item.log_time}</td>
+            <td>{action.item_num?.includes('N-Meseta') ? `💰` : `📥`}</td>
+            <td>
+              {action.item_name
+                ? action.item_name +
+                  ' - x' +
+                  /\d+(?=\))(?!\()/.exec(action.item_num ?? '')
+                : 'N-Meseta - x' +
+                  /\d+(?=\))(?!\()/.exec(action.item_num ?? '')}</td
+            >
+            <td>{new Date(action.log_time).toLocaleString()}</td>
           </tr>
         {/each}
       </tbody>

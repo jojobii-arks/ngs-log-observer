@@ -42,8 +42,10 @@ function createWindow(): BrowserWindow {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'));
   }
 
-  // ? Open Dev Tools on launch
-  mainWindow.webContents.openDevTools();
+  // Open the DevTools during development.
+  if (is.dev) {
+    mainWindow.webContents.openDevTools();
+  }
 
   return mainWindow;
 }
