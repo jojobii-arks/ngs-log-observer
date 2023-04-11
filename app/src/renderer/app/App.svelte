@@ -20,14 +20,17 @@
       0
     );
   let logToDisplay: ActionLogItem[] = [];
-  $: logToDisplay = [...log].reverse().filter((e) => {
-    /** check if `showMeseta` is on, then filter accordingly */
-    if (!showMeseta) {
-      if (e.item_num?.includes('N-Meseta')) return false;
-    }
-    /** only show pickups and sells */
-    return ['[Pickup]', '[DiscradExchange]'].includes(e.action_type);
-  });
+  $: logToDisplay = [...log]
+    .reverse()
+    .filter((e) => {
+      /** check if `showMeseta` is on, then filter accordingly */
+      if (!showMeseta) {
+        if (e.item_num?.includes('N-Meseta')) return false;
+      }
+      /** only show pickups and sells */
+      return ['[Pickup]', '[DiscradExchange]'].includes(e.action_type);
+    })
+    .slice(0, amountToDisplay - 1);
 
   let showMeseta = true;
   let isAlwaysOnTop = false;
@@ -124,7 +127,7 @@
         </tr>
       </thead>
       <tbody class="min-h-full">
-        {#each logToDisplay.slice(0, amountToDisplay - 1) as action (action.log_time + action.action_id)}
+        {#each logToDisplay as action (action.log_time + action.action_id)}
           <tr in:fade animate:flip={{ duration: 200 }}>
             <td>{action.item_num?.includes('N-Meseta') ? `💰` : `📥`}</td>
             <td>
