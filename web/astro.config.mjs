@@ -7,6 +7,5 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   integrations: [tailwind(), mdx()],
   site: 'https://jojobii.github.io/',
-  base: '/ngs-log-observer',
+  base: '/nt-ngs-log-observer',
 });
-

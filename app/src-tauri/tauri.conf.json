@@ -6,7 +6,7 @@
 		"distDir": "../build"
 	},
 	"package": {
-		"productName": "NGS Log Observer",
+		"productName": "NT NGS Log Observer",
 		"version": "../package.json"
 	},
 	"tauri": {
@@ -52,10 +52,10 @@
 				"icons/icon.icns",
 				"icons/icon.ico"
 			],
-			"identifier": "com.ngs-log-observer.app",
+			"identifier": "com.nt-ngs-log-observer.app",
 			"longDescription": "An ActionLog viewer for PSO2:NGS©",
 			"resources": [],
-			"shortDescription": "NGS Log Observer",
+			"shortDescription": "NT NGS Log Observer",
 			"targets": "all",
 			"windows": {
 				"certificateThumbprint": null,
@@ -77,7 +77,7 @@
 				"minWidth": 250,
 				"minHeight": 250,
 				"resizable": true,
-				"title": "NGS Log Observer",
+				"title": "NT NGS Log Observer",
 				"decorations": false
 			}
 		]

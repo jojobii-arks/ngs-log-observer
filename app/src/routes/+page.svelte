@@ -5,6 +5,8 @@
 	import type { ActionLogItem } from '$lib/types';
 	import { fade } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
+	const name = 'NT NGS Log Observer';
+	const version = 'v1.0.0';
 
 	$: sessionMesetaTotal = [...$logs]
 		.filter(
@@ -44,7 +46,13 @@
 <main class="flex h-[100vh] flex-col overflow-y-clip">
 	<header data-tauri-drag-region class="draggable select-none bg-base-300 p-4">
 		<div data-tauri-drag-region>
-			<h1 data-tauri-drag-region class="mb-1 text-2xl font-black">NGS Log Observer</h1>
+			<h1
+				data-tauri-drag-region
+				class="mb-1 text-2xl font-black"
+				title={name + '\n' + 'Version: ' + version}
+			>
+				NT NGS Log Observer
+			</h1>
 			<p data-tauri-drag-region class="mb-2 text-sm">
 				Using logs from{' '}
 				<button

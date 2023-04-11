@@ -1,6 +1,6 @@
-# ngs-log-observer/web
+# nt-ngs-log-observer/web
 
-Landing Page for [NGS Log Observer](https://jojobii-arks.github.io/ngs-log-observer).
+Landing Page for [NT NGS Log Observer](https://jojobii-arks.github.io/nt-ngs-log-observer).
 
 ## Dev
 

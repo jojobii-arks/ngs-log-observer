@@ -6,7 +6,7 @@ import Core from '../components/Core.astro';
   <div class="p-8">
     <div class="max-w-2xl prose mx-auto rounded-xl bg-base-300 p-8 shadow-md">
       <header>
-        <h1 class="mb-2">NGS Log Observer</h1>
+        <h1 class="mb-2">NT NGS Log Observer</h1>
         <p>
           An <i>ActionLog</i> viewer for
           <a class="italic" href="https://pso2.com/">PSO2:NGS©️</a> by <a
@@ -25,11 +25,38 @@ import Core from '../components/Core.astro';
         </ul>
       </section>
 
+      <section id="differences">
+        <h2>
+          Differences from <a
+            href="https://github.com/jojobii-arks/ngs-log-observer"
+            ><code>ngs-log-observer</code></a
+          >
+        </h2>
+        <ul>
+          <li>
+            Built with <a href="https://tauri.studio/">Tauri</a> instead of Electron.
+          </li>
+          <li>Less CPU usage for a bit more RAM usage (I think?).</li>
+        </ul>
+        <img
+          class="mx-auto rounded-xl"
+          src="images/memory-usage.png"
+          alt="Memory Usage"
+        />
+        <ul>
+          <li>Starts up <strong>hella</strong> quick.</li>
+          <li>
+            <code>~3MB</code> installer size compared to <code>~60MB</code> for Electron
+            portable binary.
+          </li>
+        </ul>
+      </section>
+
       <section id="download">
         <h2>
           <a
             class="link"
-            href="https://github.com/jojobii-arks/ngs-log-observer/releases/"
+            href="https://github.com/jojobii-arks/nt-ngs-log-observer/releases/"
             >Click here to view releases!</a
           >
         </h2>
@@ -64,8 +91,8 @@ import Core from '../components/Core.astro';
           </ul>
           <li>
             View code repository here: <a
-              href="https://github.com/jojobii-arks/ngs-log-observer"
-              class="font-mono">@jojobii-arks/ngs-log-observer</a
+              href="https://github.com/jojobii-arks/nt-ngs-log-observer"
+              class="font-mono">@jojobii-arks/nt-ngs-log-observer</a
             >
           </li>
           <li>
@@ -81,9 +108,9 @@ import Core from '../components/Core.astro';
       <hr />
 
       <section id="preview">
-        <h2 class="text-center">Previews (v1.0)</h2>
+        <h2 class="text-center">Previews (v1.0.0)</h2>
         <img
-          class="mx-auto rounded-xl border-base-content border-2"
+          class="mx-auto rounded-xl"
           src="images/preview-filled-log.png"
           alt="Filled Item Log"
         />
@@ -93,6 +120,18 @@ import Core from '../components/Core.astro';
           alt="Animated Live Preview"
         /> -->
       </section>
+
+      <hr />
+      <footer>
+        <center>
+          <i
+            >©SEGA PHANTASY STAR ONLINE 2 All rights to the copyrighted works
+            (images, data, audios, texts, etc.) used in PSO2 are owned by SEGA
+            Games Co. Ltd. All other trademarks, logos and copyrights are
+            property of their respective owners
+          </i>
+        </center>
+      </footer>
     </div>
   </div>
 </Core>

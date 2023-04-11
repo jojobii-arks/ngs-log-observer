@@ -1,6 +1,6 @@
 {
-	"name": "ngs-log-observer",
-	"version": "2.0.0",
+	"name": "nt-ngs-log-observer",
+	"version": "1.0.0",
 	"description": "Action Log observer for PSO2:NGS",
 	"author": "jojobii-arks",
 	"private": true,
