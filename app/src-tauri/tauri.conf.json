@@ -7,7 +7,7 @@
 	},
 	"package": {
 		"productName": "NGS Log Observer",
-		"version": "0.1.0"
+		"version": "../package.json"
 	},
 	"tauri": {
 		"allowlist": {
@@ -39,7 +39,7 @@
 		},
 		"bundle": {
 			"active": true,
-			"category": "DeveloperTool",
+			"category": "Utility",
 			"copyright": "",
 			"deb": {
 				"depends": []
@@ -52,17 +52,10 @@
 				"icons/icon.icns",
 				"icons/icon.ico"
 			],
-			"identifier": "com.tauri.dev",
-			"longDescription": "",
-			"macOS": {
-				"entitlements": null,
-				"exceptionDomain": "",
-				"frameworks": [],
-				"providerShortName": null,
-				"signingIdentity": null
-			},
+			"identifier": "com.ngs-log-observer.app",
+			"longDescription": "An ActionLog viewer for PSO2:NGS©",
 			"resources": [],
-			"shortDescription": "",
+			"shortDescription": "NGS Log Observer",
 			"targets": "all",
 			"windows": {
 				"certificateThumbprint": null,
@@ -79,10 +72,12 @@
 		"windows": [
 			{
 				"fullscreen": false,
+				"width": 500,
 				"height": 600,
+				"minWidth": 250,
+				"minHeight": 250,
 				"resizable": true,
 				"title": "NGS Log Observer",
-				"width": 800,
 				"decorations": false
 			}
 		]
