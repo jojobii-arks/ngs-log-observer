@@ -25,8 +25,7 @@ An _ActionLog_ viewer for [PSO2:NGS©️](https://pso2.com/)
 
 ---
 
-## Previews (v1.0)
+## Previews (v1.0.4)
 
 ![Filled Item Log](web/public/images/preview-filled-log.png) 
-![Animated Live Preview](web/public/images/preview-live.gif)
 
