@@ -6,7 +6,7 @@
 	import { fade } from 'svelte/transition';
 	import { flip } from 'svelte/animate';
 	const name = 'NT NGS Log Observer';
-	const version = 'v1.0.0';
+	const version = 'v1.0.1';
 
 	$: sessionMesetaTotal = [...$logs]
 		.filter(
