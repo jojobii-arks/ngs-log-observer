@@ -1,8 +1,11 @@
-import { app, BrowserWindow, Menu } from 'electron';
+import { BrowserWindow, Menu } from 'electron';
 import getGameDirectory from '../lib/node/utils/getGameDirectory';
 import { ActionLogItem, CHANNELS } from '../lib/types';
 import chokidar from 'chokidar';
-import readActionLog from '../lib/node/utils/readActionLog';
+import fs from 'fs/promises';
+import parseActionLog from '../lib/node/utils/parseActionLog';
+import { diffLines } from 'diff';
+const encoding = 'utf16le';
 
 export default async function runtime(window: BrowserWindow) {
   console.log('Starting application...');
@@ -15,22 +18,7 @@ export default async function runtime(window: BrowserWindow) {
     window.webContents.send(CHANNELS.ACTION_NEW, action);
   }
 
-  const menu = Menu.buildFromTemplate([
-    {
-      label: app.name,
-      submenu: [
-        {
-          click: () => window.webContents.openDevTools(),
-          label: 'dev tools',
-        },
-        {
-          click: () => displayAlert('pong!'),
-          label: 'ping!',
-        },
-      ],
-    },
-  ]);
-  Menu.setApplicationMenu(menu);
+  Menu.setApplicationMenu(null);
 
   const gameDirectory = getGameDirectory();
 
@@ -45,16 +33,18 @@ export default async function runtime(window: BrowserWindow) {
       if (!path.includes('ActionLog')) {
         return;
       }
-      const data = await readActionLog(path);
+
+      const data = await fs.readFile(path, encoding);
       // Don't continue if there is no data.
       if (!data.length) {
         return;
       }
 
       if (event === 'add') {
+        const actionLog = await parseActionLog(data);
         const age =
           new Date().getTime() -
-          new Date(data[data.length - 1].log_time).getTime();
+          new Date(actionLog[actionLog.length - 1].log_time).getTime();
 
         const twoDays = 1000 * 60 * 60 * 48;
 
@@ -62,32 +52,23 @@ export default async function runtime(window: BrowserWindow) {
           return;
         }
 
-        datamap[path] = [...data];
+        datamap[path] = data;
         console.log(Object.keys(datamap));
 
         return;
       }
 
       if (event === 'change') {
-        console.log('change found', data.length);
-        console.log('final id:', data[data.length - 1].action_id);
-        console.log(path);
+        console.log('change found', path);
 
-        const previousLength = datamap[path].length;
-
-        if (data.length > previousLength) {
-          const difference = data.length - previousLength;
-
-          const payload: ActionLogItem[] = [];
-          for (let index = difference; index > 0; index--) {
-            const action = data[data.length - index];
-            console.log('new event', action);
-            datamap[path].push(action);
-            payload.push(action);
+        diffLines(datamap[path], data).forEach(async (part) => {
+          if (part.added) {
+            datamap[path] = data;
+            const actionLog = await parseActionLog(part.value);
+            console.log('new events', actionLog);
+            pushNewAction(actionLog);
           }
-          pushNewAction(payload);
-        }
-        return;
+        });
       }
     });
 }

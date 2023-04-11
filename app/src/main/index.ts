@@ -15,19 +15,17 @@ function createWindow(): BrowserWindow {
     autoHideMenuBar: true,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false,
     },
-    alwaysOnTop: true,
+    alwaysOnTop: false,
     titleBarStyle: 'hidden',
     titleBarOverlay: {
       color: '#20252e',
       symbolColor: '#a6adbb',
     },
+    backgroundColor: '#20252e',
   });
 
-  mainWindow.on('ready-to-show', () => {
-    mainWindow.show();
-  });
+  mainWindow.show();
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url);

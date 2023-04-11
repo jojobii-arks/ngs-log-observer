@@ -1,10 +1,7 @@
-import fs from 'fs/promises';
 import csv from 'csvtojson';
 import { ActionLogItem } from '../../types';
-const encoding = 'utf16le';
 
-export default async function readActionLog(filepath: string) {
-  const data = await fs.readFile(filepath, encoding);
+export default async function parseActionLog(actionLog: string) {
   const result = await csv({
     noheader: true,
     delimiter: '	',
@@ -18,6 +15,6 @@ export default async function readActionLog(filepath: string) {
       'item_num',
       'current_meseta',
     ],
-  }).fromString(data);
+  }).fromString(actionLog);
   return result as ActionLogItem[];
 }
