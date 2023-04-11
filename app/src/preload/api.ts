@@ -14,7 +14,7 @@ const api = {
     return await ipcRenderer.invoke(CHANNELS.GET_GAME_DIR);
   },
   openGameDirectory: async () => {
-    shell.openPath(await ipcRenderer.invoke(CHANNELS.GET_GAME_DIR));
+    return await ipcRenderer.invoke(CHANNELS.OPEN_GAME_DIR);
   },
   setIsAlwaysOnTop: async (isAlwaysOnTop: boolean) => {
     return (await ipcRenderer.invoke(

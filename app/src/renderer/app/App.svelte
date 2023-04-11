@@ -70,8 +70,9 @@
         Using logs from{' '}
         <button
           class="link-hover link"
-          on:click={() => {
-            api.openGameDirectory();
+          on:click={async () => {
+            console.log('clicked');
+            await api.openGameDirectory();
           }}
         >
           {gameDirectory}
