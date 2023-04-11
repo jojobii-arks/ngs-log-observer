@@ -33,6 +33,13 @@
   let isAlwaysOnTop = false;
   $: api.setIsAlwaysOnTop(isAlwaysOnTop);
 
+  let amountToDisplay = 25;
+  const amountToDisplayOptions = [
+    { value: 10, label: '10' },
+    { value: 25, label: '25' },
+    { value: 50, label: '50' },
+  ];
+
   onMount(() => {
     api.onAlert((_, value) => {
       alert(value);
@@ -94,6 +101,16 @@
             />
           </label>
         </div>
+        <div class="form-control">
+          <label class="no-drag label cursor-pointer">
+            <span class="label-text mr-4">Amount To Display</span>
+            <select bind:value={amountToDisplay} class="select select-xs">
+              {#each amountToDisplayOptions as option}
+                <option value={option.value}>{option.label}</option>
+              {/each}
+            </select>
+          </label>
+        </div>
       </div>
     </div>
   </header>
@@ -107,7 +124,7 @@
         </tr>
       </thead>
       <tbody class="min-h-full">
-        {#each logToDisplay as action (action.log_time + action.action_id)}
+        {#each logToDisplay.slice(0, amountToDisplay - 1) as action (action.log_time + action.action_id)}
           <tr in:fade animate:flip={{ duration: 200 }}>
             <td>{action.item_num?.includes('N-Meseta') ? `💰` : `📥`}</td>
             <td>
