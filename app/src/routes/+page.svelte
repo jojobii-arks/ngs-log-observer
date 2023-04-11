@@ -5,6 +5,7 @@
 	import { flip } from 'svelte/animate';
 	import { settings } from '$lib/stores/settings';
 
+	let sessionMesetaTotal = 0;
 	$: sessionMesetaTotal = [...$logs]
 		.filter(
 			(e) =>
@@ -27,18 +28,61 @@
 			return ['[Pickup]', '[DiscradExchange]'].includes(e.action_type);
 		})
 		.slice(0, $settings.amountToDisplay - 1);
+
+	import { onMount } from 'svelte';
+
+	let timeInitial = new Date();
+	let time = new Date();
+	let timeDifference = 0;
+	$: timeDifference = time.getTime() - timeInitial.getTime();
+	let sessionMesetaPerMinute = 0;
+	$: sessionMesetaPerMinute = Math.floor(sessionMesetaTotal / (timeDifference / 1000 / 60));
+
+	onMount(() => {
+		const interval = setInterval(() => {
+			time = new Date();
+		}, 1000);
+
+		return () => {
+			clearInterval(interval);
+		};
+	});
+
+	let sessionMesetaTotalDisplay = sessionMesetaTotal.toLocaleString();
+	let sessionMesetaPerMinuteDisplay = `(${
+		!Number.isNaN(sessionMesetaPerMinute) ? sessionMesetaPerMinute.toLocaleString() : 0
+	}/min)`;
+
+	$: sessionMesetaTotalDisplay = sessionMesetaTotal.toLocaleString();
+	$: sessionMesetaPerMinuteDisplay = `(${
+		!Number.isNaN(sessionMesetaPerMinute) ? sessionMesetaPerMinute.toLocaleString() : 0
+	}/min)`;
+	$: seconds = Math.floor(timeDifference / 1000);
+
+	let timeDisplay = '';
+	$: timeDisplay = `${Math.floor(seconds / 3600)}h ${Math.floor((seconds % 3600) / 60)}m ${
+		seconds % 60
+	}s`;
 </script>
 
-<header data-tauri-drag-region class="draggable select-none bg-base-300 p-4">
-	<div data-tauri-drag-region class="flex flex-wrap justify-between">
-		<div data-tauri-drag-region>
-			<div data-tauri-drag-region>Session 💰</div>
-			<div class="font-semibold select-text text-xl">
-				{sessionMesetaTotal.toLocaleString()}
-			</div>
+<header data-tauri-drag-region class="select-none bg-base-300 p-2">
+	<div class="p-2 flex flex-col gap-1 bg-neutral text-content rounded-lg">
+		<div data-tauri-drag-region class="text-sm">
+			💰
+			<span class="select-text">
+				{sessionMesetaTotalDisplay}
+				<span class="text-xs">{sessionMesetaPerMinuteDisplay}</span>
+			</span>
+		</div>
+		<div data-tauri-drag-region class="text-sm">
+			⌚
+			<span class="select-text">
+				{timeDisplay}
+			</span>
 		</div>
 	</div>
 </header>
+
 <div class="flex-auto overflow-y-scroll">
 	<table class="table-compact relative table w-full">
 		<thead class="sticky top-0">

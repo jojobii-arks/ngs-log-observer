@@ -47,7 +47,7 @@
 	</div>
 	<div class="form-control">
 		<label class="label cursor-pointer">
-			<span class="label-text mr-4">Amount To Display</span>
+			<span class="label-text mr-4">Log Items To Display</span>
 			<select bind:value={$settings.amountToDisplay} class="select select-xs">
 				{#each amountToDisplayOptions as option}
 					<option value={option.value}>{option.label}</option>
