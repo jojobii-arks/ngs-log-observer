@@ -1,4 +1,4 @@
-import { ipcRenderer, shell } from 'electron';
+import { ipcRenderer } from 'electron';
 import { CHANNELS } from '../lib/types';
 import { SetItAlwaysOnTopResponse } from '../main/ipcHandlers';
 
