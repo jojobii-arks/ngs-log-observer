@@ -10,6 +10,7 @@ const encoding = 'utf16le';
 export default async function runtime(window: BrowserWindow) {
   console.log('Starting application...');
 
+  // @ts-ignore Using this later
   function displayAlert(message: string) {
     window.webContents.send(CHANNELS.ALERT, message);
   }
