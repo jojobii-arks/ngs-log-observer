@@ -2,6 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+	@apply bg-bg text-fg;
+}
+
+hr {
+	@apply border-divider;
+}
+
+select,
+input {
+	@apply rounded-md bg-bg text-fg;
+}
+
 ::-webkit-scrollbar {
 	width: 0.5rem;
 }

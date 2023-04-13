@@ -10,13 +10,22 @@ importers:
       diff:
         specifier: ^5.1.0
         version: 5.1.0
+      json5:
+        specifier: ^2.2.3
+        version: 2.2.3
       tauri-plugin-fs-extra-api:
         specifier: github:tauri-apps/tauri-plugin-fs-extra
         version: github.com/tauri-apps/tauri-plugin-fs-extra/643d71029598f662132ddf09494c12dd7b9d4a3e
       tauri-plugin-fs-watch-api:
         specifier: github:tauri-apps/tauri-plugin-fs-watch
         version: github.com/tauri-apps/tauri-plugin-fs-watch/3bb757ff970248efaa654084a339761bd607e2aa
+      tinycolor2:
+        specifier: ^1.6.0
+        version: 1.6.0
     devDependencies:
+      '@svelte-put/clickoutside':
+        specifier: ^2.0.0
+        version: 2.0.0
       '@sveltejs/adapter-static':
         specifier: ^2.0.1
         version: 2.0.1(@sveltejs/kit@1.5.0)
@@ -29,6 +38,9 @@ importers:
       '@types/diff':
         specifier: ^5.0.3
         version: 5.0.3
+      '@types/tinycolor2':
+        specifier: ^1.4.3
+        version: 1.4.3
       '@typescript-eslint/eslint-plugin':
         specifier: ^5.45.0
         version: 5.45.0(@typescript-eslint/parser@5.45.0)(eslint@8.28.0)(typescript@5.0.2)
@@ -823,6 +835,10 @@ packages:
       rollup: 3.20.2
     dev: false
 
+  /@svelte-put/clickoutside@2.0.0:
+    resolution: {integrity: sha512-04xYxOT5Ti+VlP70+uY/a5tGnVWl3XFgnRiO9bMSHbkwOlzHxSgXyM1NCS4NV09B3i41LRuShgeMrbgU0J5cPg==}
+    dev: true
+
   /@sveltejs/adapter-static@2.0.1(@sveltejs/kit@1.5.0):
     resolution: {integrity: sha512-o5/q3YwD/ErxYCFlK1v3ydvldyNKk1lh3oeyxn4mhz+Pkbx/uuxhzmbOpytTlp5aVqNHDVsb04xadUzOFCDDzw==}
     peerDependencies:
@@ -1001,6 +1017,10 @@ packages:
 
   /@types/semver@7.3.13:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
+    dev: true
+
+  /@types/tinycolor2@1.4.3:
+    resolution: {integrity: sha512-Kf1w9NE5HEgGxCRyIcRXR/ZYtDv0V8FVPtYHwLxl0O+maGX0erE77pQlD0gpP+/KByMZ87mOA79SjifhSB3PjQ==}
     dev: true
 
   /@types/unist@2.0.6:
@@ -4428,6 +4448,10 @@ packages:
     dependencies:
       globalyzer: 0.1.0
       globrex: 0.1.2
+
+  /tinycolor2@1.6.0:
+    resolution: {integrity: sha512-XPaBkWQJdsf3pLKJV9p4qN/S+fm2Oj8AIPo1BTUhg5oxkvm9+SVEGFdhyOz7tTdUTfvxMiAs4sp6/eZO2Ew+pw==}
+    dev: false
 
   /to-fast-properties@2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}

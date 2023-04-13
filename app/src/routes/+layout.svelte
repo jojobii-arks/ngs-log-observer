@@ -26,11 +26,15 @@
 	import { settings } from '$lib/stores/settings';
 	$: appWindow.setAlwaysOnTop($settings.isAlwaysOnTop).catch(console.error);
 
+	/** Modal Handler */
+	let isModalOpen = false;
+
 	import Settings from './Settings.svelte';
+	import ThemeHandler from './ThemeHandler.svelte';
 </script>
 
 <!-- Window Controls -->
-<div class="z-[1000] flex gap-0 absolute top-0 right-0 text-white select-none">
+<nav class="z-[1000] flex gap-0 absolute top-0 right-0 select-none">
 	<button on:click={() => appWindow.minimize()}>
 		<img src={windowMinimize} alt="minimize" />
 	</button>
@@ -43,31 +47,33 @@
 	<button on:click={() => appWindow.close()}>
 		<img src={windowClose} alt="close" />
 	</button>
-</div>
+</nav>
 
-<main class="flex max-h-[100vh] max-w-[100vw] flex-col overflow-y-hidden">
+<main class="flex h-[100vh] max-w-[100vw] flex-col overflow-y-hidden">
 	<!-- Header -->
-	<div data-tauri-drag-region class="bg-base-300">
-		<label for="my-modal-4" class="btn btn-ghost normal-case font-black text-xl overflow-hidden"
-			>NGS Log Observer</label
+	<div data-tauri-drag-region class="bg-header">
+		<button
+			on:click={() => (isModalOpen = !isModalOpen)}
+			class="font-black text-xl text-accent hover:bg-buttonHoverBg transition-colors py-1 px-3"
+			>NGS Log Observer</button
 		>
 	</div>
 
 	<!-- Modal -->
-	<input type="checkbox" id="my-modal-4" class="modal-toggle" />
-	<label for="my-modal-4" class="modal">
-		<label class="modal-box relative bg-base-200" for="">
-			<label for="my-modal-4" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-
-			<Settings />
-		</label>
-	</label>
-
+	{#if isModalOpen}
+		<div class="z-[999] pointer-events-none fixed flex inset-0 justify-center items-center">
+			<div class="w-11/12 max-w-lg bg-navBg shadow-lg p-6">
+				<Settings />
+			</div>
+		</div>
+	{/if}
 	<slot />
 </main>
 
+<ThemeHandler />
+
 <style lang="postcss">
-	button {
-		@apply hover:bg-gray-700 active:bg-gray-900 px-3 py-1 m-0 transition-colors;
+	nav button {
+		@apply hover:bg-buttonHoverBg px-3 py-1 m-0 transition-colors;
 	}
 </style>

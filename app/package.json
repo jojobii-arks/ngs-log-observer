@@ -14,10 +14,12 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"devDependencies": {
+		"@svelte-put/clickoutside": "^2.0.0",
 		"@sveltejs/adapter-static": "^2.0.1",
 		"@sveltejs/kit": "^1.5.0",
 		"@tauri-apps/api": "^1.2.0",
 		"@types/diff": "^5.0.3",
+		"@types/tinycolor2": "^1.4.3",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"autoprefixer": "^10.4.14",
@@ -39,7 +41,9 @@
 	"dependencies": {
 		"csvtojson": "^2.0.10",
 		"diff": "^5.1.0",
+		"json5": "^2.2.3",
 		"tauri-plugin-fs-extra-api": "github:tauri-apps/tauri-plugin-fs-extra",
-		"tauri-plugin-fs-watch-api": "github:tauri-apps/tauri-plugin-fs-watch"
+		"tauri-plugin-fs-watch-api": "github:tauri-apps/tauri-plugin-fs-watch",
+		"tinycolor2": "^1.6.0"
 	}
 }
