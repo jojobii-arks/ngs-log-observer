@@ -127,8 +127,5 @@ export default {
 	theme: {
 		extend: {}
 	},
-	plugins: [tailwindMisskeyTheme],
-	daisyui: {
-		themes: ['dark']
-	}
+	plugins: [tailwindMisskeyTheme, require('@tailwindcss/forms')]
 };

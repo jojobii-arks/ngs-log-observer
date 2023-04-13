@@ -15,7 +15,9 @@
 </script>
 
 <h1 class="text-xl font-black">
-	<button on:click={() => open(repositoryUrl)}>{appName}</button>
+	<button class="hover:text-mk-base-content-highlighted" on:click={() => open(repositoryUrl)}
+		>{appName}</button
+	>
 </h1>
 <p class="text-xs mb-4">
 	App: v{appVersion} | Tauri: v{tauriVersion}
@@ -23,7 +25,7 @@
 <p class="text-sm">
 	Using logs from{' '}
 	<button
-		class="link-hover link"
+		class="hover:underline hover:text-mk-base-content-highlighted"
 		on:click={async () => {
 			open(gameDirectoryPath ?? '');
 		}}
@@ -31,28 +33,34 @@
 		{gameDirectoryLabel}
 	</button>
 </p>
-<hr class="border-base-content opacity-50 my-4" />
+<hr class="border-mk-misc-divider my-4" />
 <div class="flex flex-col">
-	<div class="form-control">
-		<label class="label cursor-pointer">
-			<span class="label-text mr-4">Show Meseta</span>
-			<input type="checkbox" class="toggle" bind:checked={$settings.showMeseta} />
-		</label>
-	</div>
-	<div class="form-control">
-		<label class="label cursor-pointer">
-			<span class="label-text mr-4">Always On Top</span>
-			<input type="checkbox" class="toggle" bind:checked={$settings.isAlwaysOnTop} />
-		</label>
-	</div>
-	<div class="form-control">
-		<label class="label cursor-pointer">
-			<span class="label-text mr-4">Log Items To Display</span>
-			<select bind:value={$settings.amountToDisplay} class="select select-xs">
-				{#each amountToDisplayOptions as option}
-					<option value={option.value}>{option.label}</option>
-				{/each}
-			</select>
-		</label>
-	</div>
+	<label class="form-control cursor-pointer">
+		<span class="label-text mr-4">Show Meseta</span>
+		<input type="checkbox" class="cursor-pointer" bind:checked={$settings.showMeseta} />
+	</label>
+	<label class="form-control cursor-pointer">
+		<span class="label-text mr-4">Always On Top</span>
+		<input type="checkbox" class="cursor-pointer" bind:checked={$settings.isAlwaysOnTop} />
+	</label>
+	<label class="form-control cursor-pointer">
+		<span class="label-text mr-4">Log Items To Display</span>
+		<select bind:value={$settings.amountToDisplay} class="">
+			{#each amountToDisplayOptions as option}
+				<option value={option.value}>{option.label}</option>
+			{/each}
+		</select>
+	</label>
 </div>
+
+<style lang="postcss">
+	select {
+		@apply bg-mk-base text-mk-base-content border-0 focus-visible:ring-mk-input-edge py-1;
+	}
+	input[type='checkbox'] {
+		@apply w-4 h-4 focus:ring-mk-input-edge  bg-mk-accent-content checked:bg-mk-accent;
+	}
+	.form-control {
+		@apply flex justify-between items-center hover:bg-mk-button-hover p-2;
+	}
+</style>

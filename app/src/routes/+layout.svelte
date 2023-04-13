@@ -51,7 +51,7 @@
 	<button tabindex="-1" on:click={() => appWindow.close()}> &#128473;&#xFE0E; </button>
 </nav>
 
-<main class="flex h-[100vh] max-w-[100vw] flex-col overflow-y-hidden">
+<main class="flex h-[100vh] max-w-[100vw] flex-col overflow-y-hidden select-none">
 	<!-- Header -->
 	<div data-tauri-drag-region class="bg-mk-panel-header">
 		<button
@@ -73,7 +73,7 @@
 			on:click|self={() => (isModalOpen = false)}
 			class="z-[999] bg-mk-misc-modalBg fixed inset-0 flex justify-center items-center"
 		>
-			<div class="w-11/12 max-w-lg bg-mk-panel shadow-lg p-6">
+			<div class="w-11/12 max-w-sm max-h-[70vh] overflow-y-scroll bg-mk-panel shadow-lg p-6">
 				<Settings />
 			</div>
 		</div>

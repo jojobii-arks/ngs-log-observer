@@ -10,11 +10,6 @@ hr {
 	@apply border-mk-misc-divider;
 }
 
-select,
-input {
-	@apply rounded-md bg-mk-base text-mk-base-content;
-}
-
 ::-webkit-scrollbar {
 	width: 0.5rem;
 }

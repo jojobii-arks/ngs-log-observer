@@ -65,8 +65,11 @@
 	}s`;
 </script>
 
-<div data-tauri-drag-region class="select-none bg-mk-panel-header p-2">
-	<div data-tauri-drag-region class="p-2 flex flex-col gap-1 bg-neutral text-content rounded-lg">
+<div data-tauri-drag-region class="select-none bg-mk-panel-header">
+	<div
+		data-tauri-drag-region
+		class="p-2 sm:p-3 flex flex-col gap-1 bg-neutral text-content rounded-lg"
+	>
 		<div data-tauri-drag-region class="text-sm">
 			💰
 			<span class="select-text">
@@ -83,7 +86,7 @@
 	</div>
 </div>
 
-<div class="flex-auto overflow-y-scroll bg-mk-base">
+<div class="flex-auto overflow-y-scroll bg-mk-base select-text">
 	<table class="relative w-full table-fixed">
 		<thead class="sticky top-0 bg-mk-panel">
 			<tr>
@@ -116,3 +119,9 @@
 		</tbody>
 	</table>
 </div>
+
+<style lang="postcss">
+	tbody > tr {
+		@apply hover:bg-mk-accent-focus transition-colors duration-100;
+	}
+</style>
