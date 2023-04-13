@@ -29,7 +29,7 @@
 
 	/** Modal Handler */
 	import { scale, fade } from 'svelte/transition';
-	let isModalOpen = true;
+	let isModalOpen = false;
 
 	import Settings from './Settings.svelte';
 	import ThemeHandler from './ThemeHandler.svelte';
