@@ -2,7 +2,10 @@
 	import '../app.css';
 
 	import { appWindow } from '@tauri-apps/api/window';
-	import { IconMinimize, IconRectangle, IconX } from '@tabler/icons-svelte';
+
+	import IconRectangle from '$lib/icons/IconRectangle.svelte';
+	import IconMinimize from '$lib/icons/IconMinimize.svelte';
+	import IconX from '$lib/icons/IconX.svelte';
 
 	/** Handle listeners within lifecycle. */
 	import { initializeLogListener, detachListeners } from '$lib/stores/logs';
