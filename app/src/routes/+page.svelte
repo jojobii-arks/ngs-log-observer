@@ -65,8 +65,8 @@
 	}s`;
 </script>
 
-<header data-tauri-drag-region class="select-none bg-base-300 p-2">
-	<div class="p-2 flex flex-col gap-1 bg-neutral text-content rounded-lg">
+<div data-tauri-drag-region class="select-none bg-mk-panel-header p-2">
+	<div data-tauri-drag-region class="p-2 flex flex-col gap-1 bg-neutral text-content rounded-lg">
 		<div data-tauri-drag-region class="text-sm">
 			💰
 			<span class="select-text">
@@ -81,27 +81,36 @@
 			</span>
 		</div>
 	</div>
-</header>
+</div>
 
-<div class="flex-auto overflow-y-scroll">
-	<table class="table-compact relative table w-full">
-		<thead class="sticky top-0">
+<div class="flex-auto overflow-y-scroll bg-mk-base">
+	<table class="relative w-full table-fixed">
+		<thead class="sticky top-0 bg-mk-panel">
 			<tr>
-				<th class="rounded-none">Type</th>
-				<th>Data</th>
-				<th class="rounded-none">Time</th>
+				<th class="w-16 text-center py-1">Type</th>
+				<th class="text-left pl-2 py-1">Data</th>
+				<th class="text-left pl-2 py-1">Time</th>
 			</tr>
 		</thead>
 		<tbody class="min-h-full">
 			{#each logToDisplay as action (action.log_time + action.action_id)}
-				<tr in:fade animate:flip={{ duration: 200 }}>
-					<td>{action.item_num?.includes('N-Meseta') ? `💰` : `📥`}</td>
-					<td>
+				<tr class="border-b-mk-misc-header border-b" in:fade animate:flip={{ duration: 200 }}>
+					<td class="text-center py-1.5">{action.item_num?.includes('N-Meseta') ? `💰` : `📥`}</td>
+					<td class="text-left pl-2">
 						{action.item_name
 							? action.item_name + ' - x' + /\d+(?=\))(?!\()/.exec(action.item_num ?? '')
 							: 'N-Meseta - x' + /\d+(?=\))(?!\()/.exec(action.item_num ?? '')}</td
 					>
-					<td>{new Date(action.log_time).toLocaleString()}</td>
+					<td class="text-left pl-2"
+						>{new Date(action.log_time).toLocaleString(undefined, {
+							hour: 'numeric',
+							minute: 'numeric',
+							second: 'numeric',
+							day: 'numeric',
+							month: 'numeric',
+							year: '2-digit'
+						})}</td
+					>
 				</tr>
 			{/each}
 		</tbody>

@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 body {
-	@apply bg-bg text-fg;
+	@apply bg-mk-base text-mk-base-content;
 }
 
 hr {
-	@apply border-divider;
+	@apply border-mk-misc-divider;
 }
 
 select,
 input {
-	@apply rounded-md bg-bg text-fg;
+	@apply rounded-md bg-mk-base text-mk-base-content;
 }
 
 ::-webkit-scrollbar {
@@ -20,14 +20,14 @@ input {
 }
 
 ::-webkit-scrollbar-corner {
-	background: #20252e;
+	@apply bg-mk-panel;
 }
 ::-webkit-scrollbar-thumb {
-	background-color: #343d4b;
+	@apply bg-mk-scrollbar-handle hover:bg-mk-scrollbar-handle-hover;
 	background-clip: content-box;
 	min-width: 0.5rem;
 	min-height: 32px;
 }
 ::-webkit-scrollbar-track {
-	background-color: #20252e;
+	@apply bg-mk-panel;
 }
