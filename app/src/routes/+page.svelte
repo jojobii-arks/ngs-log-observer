@@ -65,11 +65,8 @@
 	}s`;
 </script>
 
-<div data-tauri-drag-region class="select-none bg-mk-panel-header">
-	<div
-		data-tauri-drag-region
-		class="p-2 sm:p-3 flex flex-col gap-1 bg-neutral text-content rounded-lg"
-	>
+<div data-tauri-drag-region class="select-none bg-mk-windowHeader">
+	<div data-tauri-drag-region class="p-2 sm:p-3 flex flex-col gap-1">
 		<div data-tauri-drag-region class="text-sm">
 			💰
 			<span class="select-text">
@@ -86,9 +83,9 @@
 	</div>
 </div>
 
-<div class="flex-auto overflow-y-scroll bg-mk-base select-text">
+<div class="flex-auto overflow-y-scroll select-text">
 	<table class="relative w-full table-fixed">
-		<thead class="sticky top-0 bg-mk-panel">
+		<thead class="sticky top-0 bg-mk-header">
 			<tr>
 				<th class="w-16 text-center py-1">Type</th>
 				<th class="text-left pl-2 py-1">Data</th>
@@ -97,7 +94,11 @@
 		</thead>
 		<tbody class="min-h-full">
 			{#each logToDisplay as action (action.log_time + action.action_id)}
-				<tr class="border-b-mk-misc-header border-b" in:fade animate:flip={{ duration: 200 }}>
+				<tr
+					class="border-b-mk-divider border-b-[0.5px] last-of-type:border-b-0 hover:bg-mk-accentedBg transition-colors duration-75"
+					in:fade
+					animate:flip={{ duration: 200 }}
+				>
 					<td class="text-center py-1.5">{action.item_num?.includes('N-Meseta') ? `💰` : `📥`}</td>
 					<td class="text-left pl-2">
 						{action.item_name
@@ -119,9 +120,3 @@
 		</tbody>
 	</table>
 </div>
-
-<style lang="postcss">
-	tbody > tr {
-		@apply hover:bg-mk-accent-focus transition-colors duration-100;
-	}
-</style>

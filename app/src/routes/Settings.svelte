@@ -15,17 +15,16 @@
 </script>
 
 <h1 class="text-xl font-black">
-	<button class="hover:text-mk-base-content-highlighted" on:click={() => open(repositoryUrl)}
-		>{appName}</button
+	<button class="hover:text-mk-fgHighlighted" on:click={() => open(repositoryUrl)}>{appName}</button
 	>
 </h1>
-<p class="text-xs mb-4">
+<p class="text-xs mb-4 text-mk-fgTransparentWeak select-text">
 	App: v{appVersion} | Tauri: v{tauriVersion}
 </p>
 <p class="text-sm">
 	Using logs from{' '}
 	<button
-		class="hover:underline hover:text-mk-base-content-highlighted"
+		class="hover:text-mk-fgHighlighted"
 		on:click={async () => {
 			open(gameDirectoryPath ?? '');
 		}}
@@ -33,7 +32,7 @@
 		{gameDirectoryLabel}
 	</button>
 </p>
-<hr class="border-mk-misc-divider my-4" />
+<hr class="border-mk-divider my-4" />
 <div class="flex flex-col">
 	<label class="form-control cursor-pointer">
 		<span class="label-text mr-4">Show Meseta</span>
@@ -55,12 +54,12 @@
 
 <style lang="postcss">
 	select {
-		@apply bg-mk-base text-mk-base-content border-0 focus-visible:ring-mk-input-edge py-1;
+		@apply bg-mk-panel text-mk-fg border-0 focus-visible:ring-mk-focus py-1 rounded-md;
 	}
 	input[type='checkbox'] {
-		@apply w-4 h-4 focus:ring-mk-input-edge  bg-mk-accent-content checked:bg-mk-accent;
+		@apply w-4 h-4 focus:ring-mk-focus  bg-mk-fgOnAccent checked:bg-mk-accent;
 	}
 	.form-control {
-		@apply flex justify-between items-center hover:bg-mk-button-hover p-2;
+		@apply flex justify-between items-center hover:bg-mk-panelHighlight p-2;
 	}
 </style>

@@ -4,6 +4,9 @@ importers:
 
   app:
     dependencies:
+      '@tabler/icons-svelte':
+        specifier: ^2.15.0
+        version: 2.15.0(svelte@3.54.0)
       '@tailwindcss/forms':
         specifier: ^0.5.3
         version: 0.5.3(tailwindcss@3.3.1)
@@ -896,6 +899,19 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@tabler/icons-svelte@2.15.0(svelte@3.54.0):
+    resolution: {integrity: sha512-8t6Wr3UzpVtYm1d57QuWwyhkBoiz224I2fEKuafInkDz0Z/NRf0n+mSHTjBPuEJ0ORuflFcHMkb+w8lt+5912g==}
+    peerDependencies:
+      svelte: ^3.49.0
+    dependencies:
+      '@tabler/icons': 2.15.0
+      svelte: 3.54.0
+    dev: false
+
+  /@tabler/icons@2.15.0:
+    resolution: {integrity: sha512-6fwWrsLOqmeoDPii4O1/tG1lsaNoPigUEx8UrOgTLJ81HazbAy5rfypp7FN9/PGsal4VDU+hevOkaGkE6algTQ==}
+    dev: false
 
   /@tailwindcss/forms@0.5.3(tailwindcss@3.3.1):
     resolution: {integrity: sha512-y5mb86JUoiUgBjY/o6FJSFZSEttfb3Q5gllE4xoKjAAD+vBrnIhE4dViwUuow3va8mpH4s9jyUbUbrRGoRdc2Q==}
@@ -4367,7 +4383,6 @@ packages:
   /svelte@3.54.0:
     resolution: {integrity: sha512-tdrgeJU0hob0ZWAMoKXkhcxXA7dpTg6lZGxUeko5YqvPdJBiyRspGsCwV27kIrbrqPP2WUoSV9ca0gnLlw8YzQ==}
     engines: {node: '>= 8'}
-    dev: true
 
   /synckit@0.8.5:
     resolution: {integrity: sha512-L1dapNV6vu2s/4Sputv8xGsCdAVlb5nRDMFU/E27D44l5U6cw1g0dGd45uLc+OXjNMmF4ntiMdCimzcjFKQI8Q==}

@@ -2,6 +2,7 @@
 	import '../app.css';
 
 	import { appWindow } from '@tauri-apps/api/window';
+	import { IconMinimize, IconRectangle, IconX } from '@tabler/icons-svelte';
 
 	/** Handle listeners within lifecycle. */
 	import { initializeLogListener, detachListeners, addDummyLogs } from '$lib/stores/logs';
@@ -26,6 +27,7 @@
 	$: appWindow.setAlwaysOnTop($settings.isAlwaysOnTop).catch(console.error);
 
 	/** Modal Handler */
+	import { scale, fade } from 'svelte/transition';
 	let isModalOpen = true;
 
 	import Settings from './Settings.svelte';
@@ -39,21 +41,44 @@
 />
 
 <!-- Window Controls -->
-<nav class="z-[1000] flex gap-0 absolute top-0 right-0 select-none">
-	<button tabindex="-1" on:click={() => appWindow.minimize()}> &#128469;&#xFE0E; </button>
+<nav
+	class={`z-[1000] flex gap-0 absolute top-0 right-0 select-none transition-colors ${
+		isModalOpen && 'bg-mk-acrylicPanel'
+	}`}
+>
 	<button
 		tabindex="-1"
+		class="text-mk-fg hover:text-mk-fgHighlighted"
+		on:click={() => {
+			appWindow.minimize();
+		}}
+	>
+		<IconMinimize size={18} />
+	</button>
+
+	<button
+		tabindex="-1"
+		class="text-mk-fg hover:text-mk-fgHighlighted"
 		on:click={async () =>
 			(await appWindow.isMaximized()) ? appWindow.unmaximize() : appWindow.maximize()}
 	>
-		&#128470;&#xFE0E;
+		<IconRectangle size={18} />
 	</button>
-	<button tabindex="-1" on:click={() => appWindow.close()}> &#128473;&#xFE0E; </button>
+
+	<button
+		tabindex="-1"
+		class="text-mk-fg hover:text-mk-fgHighlighted"
+		on:click={() => {
+			appWindow.close();
+		}}
+	>
+		<IconX size={18} />
+	</button>
 </nav>
 
 <main class="flex h-[100vh] max-w-[100vw] flex-col overflow-y-hidden select-none">
 	<!-- Header -->
-	<div data-tauri-drag-region class="bg-mk-panel-header">
+	<div data-tauri-drag-region class="bg-mk-windowHeader">
 		<button
 			tabindex="-1"
 			on:click={(e) => {
@@ -61,7 +86,7 @@
 				e.target?.blur();
 				isModalOpen = !isModalOpen;
 			}}
-			class="font-black text-xl text-accent hover:bg-mk-accent-focus transition-colors py-1 px-3"
+			class="font-black text-xl text-accent hover:bg-mk-accentedBg hover:text-mk-accent transition-colors py-1 px-3"
 			>NGS Log Observer</button
 		>
 	</div>
@@ -70,10 +95,14 @@
 	{#if isModalOpen}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div
+			transition:fade={{ duration: 200 }}
 			on:click|self={() => (isModalOpen = false)}
-			class="z-[999] bg-mk-misc-modalBg fixed inset-0 flex justify-center items-center"
+			class="z-[999] bg-mk-modalBg fixed inset-0 flex justify-center items-center"
 		>
-			<div class="w-11/12 max-w-sm max-h-[70vh] overflow-y-scroll bg-mk-panel shadow-lg p-6">
+			<div
+				transition:scale={{ duration: 200 }}
+				class="w-11/12 max-w-sm max-h-[70vh] overflow-y-scroll bg-mk-bg shadow-lg p-6"
+			>
 				<Settings />
 			</div>
 		</div>
@@ -85,6 +114,6 @@
 
 <style lang="postcss">
 	nav button {
-		@apply hover:bg-mk-accent-focus px-3 py-1 m-0 transition-colors;
+		@apply hover:bg-mk-panelHighlight px-3 py-1 m-0 transition-colors;
 	}
 </style>
