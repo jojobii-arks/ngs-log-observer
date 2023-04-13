@@ -2,7 +2,7 @@
 	import { settings } from '$lib/stores/settings';
 	import { metadata } from '$lib/stores/metadata';
 	import { open } from '@tauri-apps/api/shell';
-	import { addDummyLogs } from '$lib/stores/logs';
+	import { addDummyLogs, clearLogs } from '$lib/stores/logs';
 
 	$: ({ appName, appVersion, tauriVersion, gameDirectoryPath, gameDirectoryLabel } = $metadata);
 
@@ -62,8 +62,9 @@
 </div>
 
 <!-- Extra Actions -->
-<div>
+<div class="flex justify-between">
 	<button class="btn" on:click={() => addDummyLogs()}>Add Demo Logs</button>
+	<button class="btn" on:click={() => clearLogs()}>Clear Logs</button>
 </div>
 
 <style lang="postcss">

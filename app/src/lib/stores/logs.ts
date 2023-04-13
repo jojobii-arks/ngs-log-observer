@@ -92,3 +92,7 @@ export async function initializeLogListener() {
 export function addDummyLogs() {
 	logs.set([...dummyLogs]);
 }
+
+export function clearLogs() {
+	logs.set([]);
+}
