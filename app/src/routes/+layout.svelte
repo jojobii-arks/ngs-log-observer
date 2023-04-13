@@ -5,7 +5,7 @@
 	import { IconMinimize, IconRectangle, IconX } from '@tabler/icons-svelte';
 
 	/** Handle listeners within lifecycle. */
-	import { initializeLogListener, detachListeners, addDummyLogs } from '$lib/stores/logs';
+	import { initializeLogListener, detachListeners } from '$lib/stores/logs';
 	import { onMount } from 'svelte';
 	onMount(async () => {
 		/** Detach listeners if there are any; mainly for development. */
@@ -13,8 +13,6 @@
 
 		/** Initialize listeners.*/
 		const closeLogListener = await initializeLogListener();
-
-		addDummyLogs();
 
 		return async () => {
 			console.log('dismounting');
@@ -39,6 +37,8 @@
 		if (e.key === 'Escape' && isModalOpen) isModalOpen = false;
 	}}
 />
+
+<ThemeHandler />
 
 <!-- Window Controls -->
 <nav
@@ -109,8 +109,6 @@
 	{/if}
 	<slot />
 </main>
-
-<ThemeHandler />
 
 <style lang="postcss">
 	nav button {
