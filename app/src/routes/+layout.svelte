@@ -100,11 +100,11 @@
 		<div
 			transition:fade={{ duration: 200 }}
 			on:click|self={() => (isModalOpen = false)}
-			class="z-[999] bg-mk-modalBg fixed inset-0 flex justify-center items-center"
+			class="z-[999] bg-mk-modalBg fixed inset-0 flex justify-center items-center backdrop-blur-sm"
 		>
 			<div
 				transition:scale={{ duration: 200 }}
-				class="w-11/12 max-w-sm max-h-[70vh] overflow-y-scroll bg-mk-bg shadow-lg p-6"
+				class="w-11/12 max-w-sm max-h-[70vh] overflow-y-scroll bg-mk-panel shadow-xl p-6"
 			>
 				<Settings />
 			</div>

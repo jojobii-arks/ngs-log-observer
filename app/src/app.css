@@ -15,15 +15,9 @@ hr {
 	background-color: inherit;
 }
 
-/* ::-webkit-scrollbar-corner {
-	@apply bg-mk-panel;
-} */
 ::-webkit-scrollbar-thumb {
 	@apply bg-mk-scrollbarHandle hover:bg-mk-scrollbarHandleHover active:bg-mk-accent;
 	background-clip: content-box;
 	min-width: 0.5rem;
 	min-height: 32px;
 }
-/* ::-webkit-scrollbar-track {
-	@apply bg-mk-panel;
-} */

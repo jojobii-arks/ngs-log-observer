@@ -3,6 +3,7 @@
 	import { metadata } from '$lib/stores/metadata';
 	import { open } from '@tauri-apps/api/shell';
 	import { addDummyLogs, clearLogs } from '$lib/stores/logs';
+	import ThemeInput from './ThemeInput.svelte';
 
 	$: ({ appName, appVersion, tauriVersion, gameDirectoryPath, gameDirectoryLabel } = $metadata);
 
@@ -61,7 +62,15 @@
 	</label>
 </div>
 
+<hr class="border-mk-divider my-4" />
+
+<ThemeInput />
+
+<hr class="border-mk-divider my-4" />
+
 <!-- Extra Actions -->
+<h2 class="font-semibold mb-4">Debugging</h2>
+
 <div class="flex justify-between">
 	<button class="btn" on:click={() => addDummyLogs()}>Add Demo Logs</button>
 	<button class="btn" on:click={() => clearLogs()}>Clear Logs</button>
