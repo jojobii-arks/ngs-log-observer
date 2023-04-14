@@ -2,19 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-::-webkit-scrollbar {
-	width: 0.5rem;
+body {
+	@apply bg-mk-bg text-mk-fg selection:bg-mk-accent selection:text-mk-fgOnAccent;
 }
 
-::-webkit-scrollbar-corner {
-	background: #20252e;
+hr {
+	@apply border-mk-divider;
 }
+
+::-webkit-scrollbar {
+	width: 0.5rem;
+	background-color: inherit;
+}
+
 ::-webkit-scrollbar-thumb {
-	background-color: #343d4b;
+	@apply bg-mk-scrollbarHandle hover:bg-mk-scrollbarHandleHover active:bg-mk-accent;
 	background-clip: content-box;
 	min-width: 0.5rem;
 	min-height: 32px;
-}
-::-webkit-scrollbar-track {
-	background-color: #20252e;
 }

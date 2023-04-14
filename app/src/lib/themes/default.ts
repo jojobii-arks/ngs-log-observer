@@ -1,0 +1,43 @@
+export const defaultDarkThemeString = `{
+	id: '32a637ef-b47a-4775-bb7b-bacbb823f865',
+	name: 'Mi Future Dark',
+	author: 'syuilo',
+	base: 'dark',
+	props: {
+		accent: '#63e2b7',
+		bg: '#101014',
+		fg: '#D5D5D6',
+		fgHighlighted: '#fff',
+		fgOnAccent: '#000',
+		divider: 'rgba(255, 255, 255, 0.1)',
+		panel: '#18181c',
+		panelHeaderBg: '@panel',
+		panelHeaderDivider: '@divider',
+		renote: '@accent',
+		mention: '#f2c97d',
+		mentionMe: '@accent',
+		hashtag: '#70c0e8',
+		link: '#e88080',
+		buttonGradateA: '@accent',
+		buttonGradateB: ':saturate<30<:hue<30<@accent',
+	},
+}`;
+
+export const defaultLightThemeString = `{
+	id: 'a58a0abb-ff8c-476a-8dec-0ad7837e7e96',
+	name: 'Mi Rainy Light',
+	author: 'syuilo',
+	base: 'light',
+	props: {
+		accent: '#5db0da',
+		bg: 'rgb(246 248 249)',
+		fg: '#636b71',
+		panel: '#fff',
+		divider: 'rgb(230 233 234)',
+		panelHeaderDivider: '@divider',
+		renote: '@accent',
+		link: '@accent',
+		mention: '@accent',
+		hashtag: '@accent',
+	},
+}`;

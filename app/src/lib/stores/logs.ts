@@ -6,6 +6,7 @@ import parseActionLog from '$lib/parseActionLog';
 import { metadata } from 'tauri-plugin-fs-extra-api';
 import { get, writable } from 'svelte/store';
 import type { ActionLogItem } from '$lib/types';
+import { dummyLogs } from '$lib/testing';
 
 const encoding = 'utf-16le';
 const twoDays = 1000 * 60 * 60 * 48;
@@ -57,7 +58,7 @@ export async function initializeLogListener() {
 			const {
 				paths: [path]
 			} = event;
-			console.log('change found', path);
+			if (!path.includes('ActionLog')) return;
 			const data = await readEncodedTextFile(path);
 
 			diffLines(datamap[path], data).forEach(async (part) => {
@@ -68,6 +69,7 @@ export async function initializeLogListener() {
 					logs.set([...get(logs), ...actionLog]);
 				}
 			});
+			console.log('all logs', get(logs));
 		}
 	);
 
@@ -85,4 +87,12 @@ export async function initializeLogListener() {
 		clearInterval(polling);
 		stopWatching();
 	};
+}
+
+export function addDummyLogs() {
+	logs.set([...dummyLogs]);
+}
+
+export function clearLogs() {
+	logs.set([]);
 }
