@@ -1,5 +1,9 @@
 ---
 import Core from '../components/Core.astro';
+import srcPreviewLog from '../../../assets/preview/preview-log.png';
+import srcPreviewSettings from '../../../assets/preview/preview-settings.png';
+import srcDemoSettingsTheme from '../../../assets/preview/demo-settings-theme.gif';
+import srcMemoryUsage from '../../../assets/memory-usage.png';
 ---
 
 <Core>
@@ -21,43 +25,30 @@ import Core from '../components/Core.astro';
           <li>
             Watch item drops from a dedicated window as they happen in the game.
           </li>
+          <ul>
+            <li>
+              PSO2:NGS provides these logs as a <code>.txt</code> file in your game
+              documents directory. <i
+                >You won't get banned for using this program .3.</i
+              >
+            </li>
+          </ul>
           <li>View total N-Meseta gained during your play session.</li>
-        </ul>
-      </section>
-
-      <section id="differences">
-        <h2>
-          Differences from <a
-            href="https://github.com/jojobii-arks/ngs-log-observer"
-            ><code>ngs-log-observer</code></a
-          >
-        </h2>
-        <ul>
           <li>
-            Built with <a href="https://tauri.studio/">Tauri</a> instead of Electron.
-          </li>
-          <li>Less CPU usage for a bit more RAM usage (I think?).</li>
-        </ul>
-        <img
-          class="mx-auto rounded-xl"
-          src="images/memory-usage.png"
-          alt="Memory Usage"
-        />
-        <ul>
-          <li>Starts up <strong>hella</strong> quick.</li>
-          <li>
-            <code>~3MB</code> installer size compared to <code>~60MB</code> for Electron
-            portable binary.
+            Customize colors using <a
+              href="https://misskey-hub.net/en/docs/features/theme.html"
+              >Misskey Themes</a
+            >!
           </li>
         </ul>
       </section>
 
       <section id="download">
-        <h2>
+        <h2 class="text-center">
           <a
-            class="link"
-            href="https://github.com/jojobii-arks/nt-ngs-log-observer/releases/"
-            >Click here to view releases!</a
+            class="link font-black text-4xl"
+            href="https://github.com/jojobii-arks/nt-ngs-log-observer/releases/latest"
+            >Download the latest release!</a
           >
         </h2>
         <ul>
@@ -71,6 +62,25 @@ import Core from '../components/Core.astro';
             🤣
           </li>
         </ul>
+      </section>
+
+      <section id="preview">
+        <h2 class="text-center">Previews (v1.0.3)</h2>
+        <img
+          class="mx-auto rounded-xl"
+          src={srcPreviewLog}
+          alt="Filled Item Log"
+        />
+        <img
+          class="mx-auto rounded-xl"
+          src={srcPreviewSettings}
+          alt="Settings page"
+        />
+        <img
+          class="mx-auto rounded-xl"
+          src={srcDemoSettingsTheme}
+          alt="Misskey themes in application."
+        />
       </section>
 
       <section id="notes">
@@ -103,20 +113,31 @@ import Core from '../components/Core.astro';
         </ul>
       </section>
 
-      <hr />
-
-      <section id="preview">
-        <h2 class="text-center">Previews (v1.0.2)</h2>
+      <section id="differences">
+        <h2>
+          Differences from <a
+            href="https://github.com/jojobii-arks/ngs-log-observer"
+            ><code>ngs-log-observer</code></a
+          >
+        </h2>
+        <ul>
+          <li>
+            Built with <a href="https://tauri.studio/">Tauri</a> instead of Electron.
+          </li>
+          <li>Less CPU usage for a bit more RAM usage (I think?).</li>
+        </ul>
         <img
           class="mx-auto rounded-xl"
-          src="images/preview-filled-log.png"
-          alt="Filled Item Log"
+          src={srcMemoryUsage}
+          alt="Memory Usage"
         />
-        <img
-          class="mx-auto rounded-xl"
-          src="images/preview-settings.png"
-          alt="Settings"
-        />
+        <ul>
+          <li>Starts up <strong>hella</strong> quick.</li>
+          <li>
+            <code>~3MB</code> installer size compared to <code>~60MB</code> for Electron
+            portable binary.
+          </li>
+        </ul>
       </section>
 
       <hr />
