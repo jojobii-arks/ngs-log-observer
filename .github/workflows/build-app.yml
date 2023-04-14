@@ -44,6 +44,8 @@ jobs:
             ./app/src-tauri/target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
+      - uses: pnpm/action-setup@v2
+
       - name: setup Node
         uses: actions/setup-node@v2
         with:
@@ -60,8 +62,8 @@ jobs:
       - name: Setup pnpm and install deps
         working-directory: ./app
         run: |
-          corepack enable
-          pnpm install
+          corepack enable 
+          pnpm install --frozen-lockfile
 
       - uses: JonasKruckenberg/tauri-build@v1
         id: tauri_build
