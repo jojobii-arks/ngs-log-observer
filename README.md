@@ -36,11 +36,4 @@ An _ActionLog_ viewer for [PSO2:NGS©️](https://pso2.com/), but in Tauri this 
 
 ---
 
-## Previews (v1.0.2)
-
-![Filled Item Log](web/public/images/preview-filled-log.png) 
-![Settings](web/public/images/preview-settings.png) 
-
----
-
 ##### _This application is not affiliated with SEGA or any of its subsidiaries._
