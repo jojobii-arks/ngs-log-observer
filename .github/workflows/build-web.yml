@@ -5,7 +5,7 @@
 name: Build /web
 
 on:
-  # Runs on pushes targeting the default branch
+  # Runs on pushes targeting the default branch if changes are made to the app directory
   push:
     branches: 
       - main
