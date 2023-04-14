@@ -28,6 +28,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      # Change to app directory
+      - name: change to app directory
+        run: cd app
+
       - name: setup node
         uses: actions/setup-node@v1
         with:
@@ -36,9 +40,6 @@ jobs:
         # setup pnpm and set cwd to /app
       - name: Setup pnpm
         uses: pnpm/action-setup@v2.2.4
-        with:
-          run_install: |
-            cwd: ./app
 
       - name: install Rust stable
         uses: actions-rs/toolchain@v1
