@@ -15,6 +15,8 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+
+
 jobs:
   build-binaries:
     strategy:
@@ -30,6 +32,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 18
+      
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.2.4
 
       - name: install Rust stable
         uses: actions-rs/toolchain@v1
@@ -38,6 +43,8 @@ jobs:
 
       - uses: JonasKruckenberg/tauri-build@v1
         id: tauri_build
+        with:
+          projectPath: app
 
       # The `artifacts` output can now be used by a different action to upload the artifacts
       - uses: actions/upload-artifact@v3
