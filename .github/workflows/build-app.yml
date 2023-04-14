@@ -1,8 +1,15 @@
 name: 'Build /app'
 
 on:
-  # Runs on pushes targeting the default branch if changes are made to the web directory
+  # Runs on pushes targeting the default branch if changes are made to the app directory
   push:
+    branches: 
+      - main
+    paths:
+      - "app/**"
+
+  # Runs on PRs targeting the default branch if changes are made to the app directory
+  pull_request:
     branches: 
       - main
     paths:
@@ -19,35 +26,44 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-
-
 jobs:
-  build-binaries:
+  build-binary:
     strategy:
       fail-fast: false
-      matrix:
-        platform: [windows-latest]
 
-    runs-on: ${{ matrix.platform }}
+    runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - name: setup node
-        uses: actions/setup-node@v1
+      - name: Cache cargo
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ./app/src-tauri/target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+
+      - uses: pnpm/action-setup@v2
+
+      - name: setup Node
+        uses: actions/setup-node@v2
         with:
           node-version: 18
-      
-        # setup pnpm and set cwd to /app
-      - name: Setup pnpm and install deps
-        working-directory: ./app
-        run: |
-          corepack enable
-          pnpm install
+          cache: 'pnpm'
+          cache-dependency-path: 'pnpm-lock.yaml'
 
-      - name: install Rust stable
+
+      - name: setup Rust stable
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+
+      - name: Setup pnpm and install deps
+        working-directory: ./app
+        run: |
+          corepack enable 
+          pnpm install --frozen-lockfile
 
       - uses: JonasKruckenberg/tauri-build@v1
         id: tauri_build
