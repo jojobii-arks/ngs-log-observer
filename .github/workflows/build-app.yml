@@ -28,18 +28,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # Change to app directory
-      - name: change to app directory
-        run: cd app
-
       - name: setup node
         uses: actions/setup-node@v1
         with:
           node-version: 18
       
         # setup pnpm and set cwd to /app
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2.2.4
+      - name: Setup pnpm and install deps
+        working-directory: ./app
+        run: |
+          corepack enable
+          pnpm install
 
       - name: install Rust stable
         uses: actions-rs/toolchain@v1
