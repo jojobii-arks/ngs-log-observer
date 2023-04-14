@@ -33,8 +33,12 @@ jobs:
         with:
           node-version: 18
       
+        # setup pnpm and set cwd to /app
       - name: Setup pnpm
         uses: pnpm/action-setup@v2.2.4
+        with:
+          run_install: |
+            - cwd: app
 
       - name: install Rust stable
         uses: actions-rs/toolchain@v1
