@@ -1,6 +1,6 @@
 # [NGS Log Observer](https://jojobii-arks.github.io/ngs-log-observer/)
 
-Code repository for NT NGS Log Observer.
+Code repository for NGS Log Observer.
 
 An _ActionLog_ viewer for [PSO2:NGS©️](https://pso2.com/), but in Tauri this time!
 
