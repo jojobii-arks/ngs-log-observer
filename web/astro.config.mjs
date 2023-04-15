@@ -6,6 +6,5 @@ import mdx from '@astrojs/mdx';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), mdx()],
-  site: 'https://jojobii.github.io/',
-  base: '/nt-ngs-log-observer',
+  site: 'https://ngs-logs.arks.moe/',
 });
