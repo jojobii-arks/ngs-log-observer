@@ -13,7 +13,7 @@
 		{ value: 50, label: '50' }
 	];
 
-	const repositoryUrl = 'https://github.com/jojobii-arks/nt-ngs-log-observer';
+	const repositoryUrl = 'https://github.com/jojobii-arks/ngs-log-observer';
 </script>
 
 <!-- Header Block -->

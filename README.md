@@ -1,4 +1,4 @@
-# [NT NGS Log Observer](https://jojobii-arks.github.io/nt-ngs-log-observer/)
+# [NGS Log Observer](https://jojobii-arks.github.io/ngs-log-observer/)
 
 Code repository for NT NGS Log Observer.
 
@@ -10,7 +10,7 @@ An _ActionLog_ viewer for [PSO2:NGS©️](https://pso2.com/), but in Tauri this 
 - [`/web`](web) includes landing page source code.
 - View development information in the packages' `README.md` files.
 
-## Differences from [`ngs-log-observer`](https://github.com/jojobii-arks/ngs-log-observer)
+## Differences from [`ot-ngs-log-observer`](https://github.com/jojobii-arks/ot-ngs-log-observer)
 
 - Built with [Tauri](https://tauri.studio/) instead of Electron.
 - Less CPU usage for a bit more RAM usage (I think?).
