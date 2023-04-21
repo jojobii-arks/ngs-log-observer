@@ -8,11 +8,15 @@
 	import { onMount } from 'svelte';
 	let themeInput = '';
 	let error: string | null = null;
+	let ready = false;
 
 	// Theme validation.
 	$: try {
-		parseTheme(themeInput);
-		error = null;
+		(() => {
+			if (!ready) return;
+			parseTheme(themeInput);
+			error = null;
+		})(); // Hack to make Svelte happy.
 	} catch (err) {
 		console.log(err);
 		if (err instanceof SyntaxError) {
@@ -27,6 +31,7 @@
 	// Initialize text input to current theme.
 	onMount(() => {
 		themeInput = $themeString;
+		ready = true;
 	});
 
 	async function handleApply() {
@@ -74,7 +79,7 @@
 <button
 	on:click={handleApply}
 	disabled={!!error}
-	class="transition-colors  rounded-md px-4 py-2 text-sm disabled:opacity-50 w-full mt-2 bg-mk-accent hover:bg-mk-accentLighten font-semibold text-mk-fgOnAccent"
+	class="transition-colors rounded-md px-4 py-2 text-sm disabled:opacity-50 w-full mt-2 bg-mk-accent hover:bg-mk-accentLighten font-semibold text-mk-fgOnAccent"
 	>Apply Theme</button
 >
 <p class="text-mk-fgTransparentWeak text-sm italic font-light text-center">
