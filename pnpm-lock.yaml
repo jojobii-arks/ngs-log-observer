@@ -30,6 +30,9 @@ importers:
       tinycolor2:
         specifier: ^1.6.0
         version: 1.6.0
+      zod:
+        specifier: ^3.21.4
+        version: 3.21.4
     devDependencies:
       '@sveltejs/adapter-static':
         specifier: ^2.0.2

@@ -1,21 +1,15 @@
-type Settings = {
-	showMeseta: boolean;
-	isAlwaysOnTop: boolean;
-	amountToDisplay: number;
-};
-
-const defaultSettings: Settings = {
-	showMeseta: true,
-	isAlwaysOnTop: false,
-	amountToDisplay: 25
-};
-
 import { z } from 'zod';
 const settingsSchema = z.object({
 	showMeseta: z.boolean(),
 	isAlwaysOnTop: z.boolean(),
 	amountToDisplay: z.number()
 });
+
+const defaultSettings: z.infer<typeof settingsSchema> = {
+	showMeseta: true,
+	isAlwaysOnTop: false,
+	amountToDisplay: 25
+};
 
 import { writable } from 'svelte/store';
 import { Store } from 'tauri-plugin-store-api';
@@ -33,6 +27,8 @@ function createTauriWritable<T>(key: string, defaultValue: T, schema: z.ZodType)
 		if (parsed.success) {
 			console.log('Value found for key', key, 'setting to', parsed.data);
 			set(parsed.data);
+		} else {
+			console.log('Value found for key', key, 'is invalid', parsed.error);
 		}
 	});
 	return {
@@ -50,10 +46,10 @@ function createTauriWritable<T>(key: string, defaultValue: T, schema: z.ZodType)
 	};
 }
 
-import { parseTheme } from '$lib/themes';
+import { parseTheme, themeSchema } from '$lib/themes';
 import { defaultDarkThemeString } from '$lib/themes/default';
 
 export const settings = createTauriWritable('settings', defaultSettings, settingsSchema);
 
-export const theme = writable(parseTheme(defaultDarkThemeString));
-export const themeString = writable(defaultDarkThemeString);
+export const theme = createTauriWritable('theme', parseTheme(defaultDarkThemeString), themeSchema);
+export const themeString = createTauriWritable('themeString', defaultDarkThemeString, z.string());

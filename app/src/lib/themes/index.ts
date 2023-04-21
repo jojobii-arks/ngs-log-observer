@@ -1,6 +1,7 @@
 import JSON5 from 'json5';
+import { z } from 'zod';
 
-type Theme = {
+export type Theme = {
 	id: string;
 	name: string;
 	author: string;
@@ -8,6 +9,15 @@ type Theme = {
 	base?: 'dark' | 'light';
 	props: Record<string, string>;
 };
+
+export const themeSchema = z.object({
+	id: z.string().optional(),
+	name: z.string().optional(),
+	author: z.string().optional(),
+	desc: z.string().optional(),
+	base: z.union([z.literal('dark'), z.literal('light')]),
+	props: z.record(z.string())
+});
 
 export const baseDarkThemeString = `// ダークテーマのベーステーマ
 // このテーマが直接使われることは無い
