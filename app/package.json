@@ -47,6 +47,7 @@
 		"tauri-plugin-fs-extra-api": "github:tauri-apps/tauri-plugin-fs-extra",
 		"tauri-plugin-fs-watch-api": "github:tauri-apps/tauri-plugin-fs-watch",
 		"tauri-plugin-store-api": "github:tauri-apps/tauri-plugin-store",
-		"tinycolor2": "^1.6.0"
+		"tinycolor2": "^1.6.0",
+		"zod": "^3.21.4"
 	}
 }
