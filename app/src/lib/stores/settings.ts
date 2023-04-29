@@ -2,13 +2,23 @@ import { z } from 'zod';
 const settingsSchema = z.object({
 	showMeseta: z.boolean(),
 	isAlwaysOnTop: z.boolean(),
-	amountToDisplay: z.number()
+	amountToDisplay: z.number(),
+	showSigne: z.boolean(),
+	dropCounters: z.array(
+		z.object({
+			id: z.string(),
+			itemName: z.string(),
+			highlight: z.boolean()
+		})
+	)
 });
 
 const defaultSettings: z.infer<typeof settingsSchema> = {
 	showMeseta: true,
 	isAlwaysOnTop: false,
-	amountToDisplay: 25
+	amountToDisplay: 25,
+	showSigne: false,
+	dropCounters: []
 };
 
 import { writable } from 'svelte/store';

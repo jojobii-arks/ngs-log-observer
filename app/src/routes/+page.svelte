@@ -16,7 +16,7 @@
 			(total: number, action) => total + Number(/\d+(?=\))(?!\()/.exec(action.item_num ?? '')),
 			0
 		);
-	let logToDisplay: ActionLogItem[] = [];
+	let logToDisplay: (ActionLogItem & { highlighted: boolean })[] = [];
 	$: logToDisplay = [...$logs]
 		.reverse()
 		.filter((e) => {
@@ -24,10 +24,22 @@
 			if (!$settings.showMeseta) {
 				if (e.item_num?.includes('N-Meseta')) return false;
 			}
+
+			/** check if `showSigne` is on, then filter accordingly */
+			if (!$settings.showSigne) {
+				if (['RestaSign', 'ReverserSign'].includes(e.item_name ?? '')) return false;
+			}
+
 			/** only show pickups and sells */
 			return ['[Pickup]', '[DiscradExchange]'].includes(e.action_type);
 		})
-		.slice(0, $settings.amountToDisplay - 1);
+		.slice(0, $settings.amountToDisplay - 1)
+		.map((action) => ({
+			...action,
+			highlighted: !!$settings.dropCounters
+				.filter((e) => e.highlight)
+				.find((e) => action.item_name?.includes(e.itemName))
+		}));
 
 	import { onMount } from 'svelte';
 
@@ -35,8 +47,8 @@
 	let time = new Date();
 	let timeDifference = 0;
 	$: timeDifference = time.getTime() - timeInitial.getTime();
-	let sessionMesetaPerMinute = 0;
-	$: sessionMesetaPerMinute = Math.floor(sessionMesetaTotal / (timeDifference / 1000 / 60));
+	let sessionMesetaPerHour = 0;
+	$: sessionMesetaPerHour = Math.floor(sessionMesetaTotal / (timeDifference / 1000 / 60 / 60));
 
 	onMount(() => {
 		const interval = setInterval(() => {
@@ -49,37 +61,81 @@
 	});
 
 	let sessionMesetaTotalDisplay = sessionMesetaTotal.toLocaleString();
-	let sessionMesetaPerMinuteDisplay = `(${
-		!Number.isNaN(sessionMesetaPerMinute) ? sessionMesetaPerMinute.toLocaleString() : 0
-	}/min)`;
+	let sessionMesetaPerHourDisplay = `(${
+		!Number.isNaN(sessionMesetaPerHour) ? sessionMesetaPerHour.toLocaleString() : 0
+	}/hr)`;
 
 	$: sessionMesetaTotalDisplay = sessionMesetaTotal.toLocaleString();
-	$: sessionMesetaPerMinuteDisplay = `(${
-		!Number.isNaN(sessionMesetaPerMinute) ? sessionMesetaPerMinute.toLocaleString() : 0
-	}/min)`;
+	$: sessionMesetaPerHourDisplay = `(${
+		!Number.isNaN(sessionMesetaPerHour) ? sessionMesetaPerHour.toLocaleString() : 0
+	}/hr)`;
 	$: seconds = Math.floor(timeDifference / 1000);
 
 	let timeDisplay = '';
 	$: timeDisplay = `${Math.floor(seconds / 3600)}h ${Math.floor((seconds % 3600) / 60)}m ${
 		seconds % 60
 	}s`;
+
+	// Map counters to display
+	let countersDisplay: {
+		counter: {
+			id: string;
+			itemName: string;
+			highlight: boolean;
+		};
+		total: number;
+		perHourDisplay: string;
+	}[] = [];
+	$: countersDisplay = $settings.dropCounters
+		.filter((e) => !!e.itemName)
+		.map((counter) => {
+			if (counter.itemName.length === 0) return { counter, total: 0, perHourDisplay: '' };
+			const total = [...$logs]
+				.filter(
+					(e) => ['[Pickup]'].includes(e.action_type) && e.item_name?.includes(counter.itemName)
+				)
+				.reduce(
+					(total: number, action) => total + Number(/\d+(?=\))(?!\()/.exec(action.item_num ?? '')),
+					0
+				);
+			const perHourDisplay = `(${Math.floor(total / (timeDifference / 1000 / 60 / 60))}/hr)`;
+			return {
+				counter,
+				total,
+				perHourDisplay
+			};
+		});
 </script>
 
 <div data-tauri-drag-region class="select-none bg-mk-windowHeader">
 	<div data-tauri-drag-region class="p-2 sm:p-3 flex flex-col gap-1">
-		<div data-tauri-drag-region class="text-sm">
-			💰
-			<span class="select-text">
-				{sessionMesetaTotalDisplay}
-				<span class="text-xs">{sessionMesetaPerMinuteDisplay}</span>
-			</span>
-		</div>
 		<div data-tauri-drag-region class="text-sm">
 			⌚
 			<span class="select-text">
 				{timeDisplay}
 			</span>
 		</div>
+		<div data-tauri-drag-region class="text-sm">
+			💰
+			<span class="select-text">
+				{sessionMesetaTotalDisplay}
+				<span class="text-xs">{sessionMesetaPerHourDisplay}</span>
+			</span>
+		</div>
+		<hr class="my-2" />
+		<ul data-tauri-drag-region class="">
+			{#each countersDisplay as display (display.counter.id)}
+				<li data-tauri-drag-region class="text-sm">
+					{display.counter.highlight ? '⭐' : '🟩'}
+					<code data-tauri-drag-region>"{display.counter.itemName}"</code>
+					-
+					<span class="select-text">
+						{display.total}
+						<span class="text-xs">{display.perHourDisplay}</span>
+					</span>
+				</li>
+			{/each}
+		</ul>
 	</div>
 </div>
 
@@ -95,12 +151,15 @@
 		<tbody class="min-h-full">
 			{#each logToDisplay as action (action.log_time + action.action_id)}
 				<tr
-					class="border-b-mk-divider border-b-[0.5px] last-of-type:border-b-0 hover:bg-mk-accentedBg transition-colors duration-75"
+					class="border-b-mk-divider border-b-[0.5px] last-of-type:border-b-0 transition-colors duration-75
+					{action.highlighted
+						? 'bg-mk-accent text-mk-fgOnAccent hover:bg-mk-accentLighten selection:bg-mk-accentDarken'
+						: 'hover:bg-mk-accentedBg'} "
 					in:fade
 					animate:flip={{ duration: 200 }}
 				>
 					<td class="text-center py-1.5">{action.item_num?.includes('N-Meseta') ? `💰` : `📥`}</td>
-					<td class="text-left pl-2">
+					<td class="text-left pl-2 {action.highlighted && 'font-bold'}">
 						{action.item_name
 							? action.item_name + ' - x' + /\d+(?=\))(?!\()/.exec(action.item_num ?? '')
 							: 'N-Meseta - x' + /\d+(?=\))(?!\()/.exec(action.item_num ?? '')}</td
