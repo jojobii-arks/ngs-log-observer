@@ -11,6 +11,15 @@
 
  -->
 
+## v1.1.0
+
+### General
+
+- **Save user settings across sessions!**
+- Add toggle for signe display
+- Add custom drop counters with checkboxes for highlighting specified drops.
+- Change counters to items per hour instead of items per minute
+
 ## v1.0.3
 
 ### General
