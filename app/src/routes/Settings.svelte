@@ -53,6 +53,10 @@
 		<input type="checkbox" class="cursor-pointer" bind:checked={$settings.isAlwaysOnTop} />
 	</label>
 	<label class="form-control cursor-pointer">
+		<span class="label-text mr-4">Show *-signe pickups</span>
+		<input type="checkbox" class="cursor-pointer" bind:checked={$settings.showSigne} />
+	</label>
+	<label class="form-control cursor-pointer">
 		<span class="label-text mr-4">Log Items To Display</span>
 		<select bind:value={$settings.amountToDisplay} class="">
 			{#each amountToDisplayOptions as option}
@@ -61,6 +65,31 @@
 		</select>
 	</label>
 </div>
+
+<hr class="border-mk-divider my-4" />
+
+<h2 class="font-semibold mb-2">Counters</h2>
+
+<ul class="flex flex-col gap-2">
+	{#each $settings.dropCounters as dropCounter (dropCounter.id)}
+		<div class="flex gap-2">
+			<input class="w-full" type="text" bind:value={dropCounter.itemName} />
+			<button
+				class="btn"
+				on:click={() =>
+					($settings.dropCounters = $settings.dropCounters.filter((e) => e.id !== dropCounter.id))}
+				>🗑️</button
+			>
+		</div>
+	{/each}
+</ul>
+
+<button
+	class="btn w-full mt-2"
+	on:click={() => {
+		$settings.dropCounters = [...$settings.dropCounters, { id: crypto.randomUUID(), itemName: '' }];
+	}}>Create Counter</button
+>
 
 <hr class="border-mk-divider my-4" />
 
@@ -82,6 +111,9 @@
 	}
 	input[type='checkbox'] {
 		@apply w-4 h-4 focus:ring-mk-focus  bg-mk-fgOnAccent checked:bg-mk-accent;
+	}
+	input[type='text'] {
+		@apply text-xs p-1 border-[1px] border-mk-inputBorder hover:border-mk-inputBorderHover focus:ring-mk-accent bg-mk-panel;
 	}
 	.form-control {
 		@apply flex justify-between items-center hover:bg-mk-panelHighlight p-2;
