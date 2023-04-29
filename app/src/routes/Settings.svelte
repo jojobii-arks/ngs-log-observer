@@ -46,15 +46,15 @@
 <div class="flex flex-col my-4">
 	<label class="form-control cursor-pointer">
 		<span class="label-text mr-4">Show Meseta</span>
-		<input type="checkbox" class="cursor-pointer" bind:checked={$settings.showMeseta} />
+		<input type="checkbox" class="cursor-pointer w-4 h-4" bind:checked={$settings.showMeseta} />
 	</label>
 	<label class="form-control cursor-pointer">
 		<span class="label-text mr-4">Always On Top</span>
-		<input type="checkbox" class="cursor-pointer" bind:checked={$settings.isAlwaysOnTop} />
+		<input type="checkbox" class="cursor-pointer w-4 h-4" bind:checked={$settings.isAlwaysOnTop} />
 	</label>
 	<label class="form-control cursor-pointer">
 		<span class="label-text mr-4">Show *-signe pickups</span>
-		<input type="checkbox" class="cursor-pointer" bind:checked={$settings.showSigne} />
+		<input type="checkbox" class="cursor-pointer w-4 h-4" bind:checked={$settings.showSigne} />
 	</label>
 	<label class="form-control cursor-pointer">
 		<span class="label-text mr-4">Log Items To Display</span>
@@ -73,6 +73,7 @@
 <ul class="flex flex-col gap-2">
 	{#each $settings.dropCounters as dropCounter (dropCounter.id)}
 		<div class="flex gap-2">
+			<input type="checkbox" class="h-[38px]" bind:checked={dropCounter.highlight} />
 			<input class="w-full" type="text" bind:value={dropCounter.itemName} />
 			<button
 				class="btn"
@@ -87,7 +88,10 @@
 <button
 	class="btn w-full mt-2"
 	on:click={() => {
-		$settings.dropCounters = [...$settings.dropCounters, { id: crypto.randomUUID(), itemName: '' }];
+		$settings.dropCounters = [
+			...$settings.dropCounters,
+			{ id: crypto.randomUUID(), itemName: '', highlight: false }
+		];
 	}}>Create Counter</button
 >
 
@@ -110,10 +114,10 @@
 		@apply bg-mk-panel text-mk-fg border-0 focus-visible:ring-mk-focus py-1 rounded-md;
 	}
 	input[type='checkbox'] {
-		@apply w-4 h-4 focus:ring-mk-focus  bg-mk-fgOnAccent checked:bg-mk-accent;
+		@apply focus:ring-mk-focus bg-mk-fgOnAccent checked:bg-mk-accent;
 	}
 	input[type='text'] {
-		@apply text-xs p-1 border-[1px] border-mk-inputBorder hover:border-mk-inputBorderHover focus:ring-mk-accent bg-mk-panel;
+		@apply text-sm border-[1px] border-mk-inputBorder hover:border-mk-inputBorderHover focus:ring-mk-accent bg-mk-panel;
 	}
 	.form-control {
 		@apply flex justify-between items-center hover:bg-mk-panelHighlight p-2;

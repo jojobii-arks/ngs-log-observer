@@ -16,7 +16,7 @@
 			(total: number, action) => total + Number(/\d+(?=\))(?!\()/.exec(action.item_num ?? '')),
 			0
 		);
-	let logToDisplay: ActionLogItem[] = [];
+	let logToDisplay: (ActionLogItem & { highlighted: boolean })[] = [];
 	$: logToDisplay = [...$logs]
 		.reverse()
 		.filter((e) => {
@@ -33,7 +33,13 @@
 			/** only show pickups and sells */
 			return ['[Pickup]', '[DiscradExchange]'].includes(e.action_type);
 		})
-		.slice(0, $settings.amountToDisplay - 1);
+		.slice(0, $settings.amountToDisplay - 1)
+		.map((action) => ({
+			...action,
+			highlighted: !!$settings.dropCounters
+				.filter((e) => e.highlight)
+				.find((e) => action.item_name?.includes(e.itemName))
+		}));
 
 	import { onMount } from 'svelte';
 
@@ -75,6 +81,7 @@
 		counter: {
 			id: string;
 			itemName: string;
+			highlight: boolean;
 		};
 		total: number;
 		perHourDisplay: string;
@@ -116,10 +123,12 @@
 			</span>
 		</div>
 		<hr class="my-2" />
-		<ul class="">
+		<ul data-tauri-drag-region class="">
 			{#each countersDisplay as display (display.counter.id)}
 				<li data-tauri-drag-region class="text-sm">
-					📥 <i>"{display.counter.itemName}"</i> -
+					{display.counter.highlight ? '⭐' : '🟩'}
+					<code data-tauri-drag-region>"{display.counter.itemName}"</code>
+					-
 					<span class="select-text">
 						{display.total}
 						<span class="text-xs">{display.perHourDisplay}</span>
@@ -142,12 +151,15 @@
 		<tbody class="min-h-full">
 			{#each logToDisplay as action (action.log_time + action.action_id)}
 				<tr
-					class="border-b-mk-divider border-b-[0.5px] last-of-type:border-b-0 hover:bg-mk-accentedBg transition-colors duration-75"
+					class="border-b-mk-divider border-b-[0.5px] last-of-type:border-b-0 transition-colors duration-75
+					{action.highlighted
+						? 'bg-mk-accent text-mk-fgOnAccent hover:bg-mk-accentLighten selection:bg-mk-accentDarken'
+						: 'hover:bg-mk-accentedBg'} "
 					in:fade
 					animate:flip={{ duration: 200 }}
 				>
 					<td class="text-center py-1.5">{action.item_num?.includes('N-Meseta') ? `💰` : `📥`}</td>
-					<td class="text-left pl-2">
+					<td class="text-left pl-2 {action.highlighted && 'font-bold'}">
 						{action.item_name
 							? action.item_name + ' - x' + /\d+(?=\))(?!\()/.exec(action.item_num ?? '')
 							: 'N-Meseta - x' + /\d+(?=\))(?!\()/.exec(action.item_num ?? '')}</td

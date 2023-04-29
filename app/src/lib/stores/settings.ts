@@ -7,7 +7,8 @@ const settingsSchema = z.object({
 	dropCounters: z.array(
 		z.object({
 			id: z.string(),
-			itemName: z.string()
+			itemName: z.string(),
+			highlight: z.boolean()
 		})
 	)
 });
