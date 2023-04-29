@@ -82,9 +82,6 @@
 	class="transition-colors rounded-md px-4 py-2 text-sm disabled:opacity-50 w-full mt-2 bg-mk-accent hover:bg-mk-accentLighten font-semibold text-mk-fgOnAccent"
 	>Apply Theme</button
 >
-<p class="text-mk-fgTransparentWeak text-sm italic font-light text-center">
-	(does not persist across sessions yet!)
-</p>
 
 <style lang="postcss">
 	button.btn {
